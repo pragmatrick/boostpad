@@ -1,4 +1,4 @@
-const Canvas = require("canvas");
+//const Canvas = require("canvas");
 const Discord = require("discord.js");
 
 module.exports = {
@@ -6,6 +6,7 @@ module.exports = {
     description: "Creates for a user a custom welcome-image.",
     async execute(client, msg, args) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
+        /*
         const applyText = (canvas, text) => {
             const ctx = canvas.getContext("2d");
             let fontSize = 70;
@@ -56,6 +57,6 @@ module.exports = {
             "welcome-image.png"
         );
         channel.send(`Welcome to the server, ${member}!`, attachment);
-        msg.delete();
+        msg.delete();*/
     }
 }
