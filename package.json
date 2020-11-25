@@ -2,10 +2,10 @@
   "name": "discordbot",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node main.js debug",
-    "start": "node main.js"
+    "test": "node index.js debug",
+    "start": "node index.js"
   },
   "author": "grafpatron",
   "license": "ISC",
