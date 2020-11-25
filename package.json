@@ -1,22 +1,19 @@
 {
-  "name": "discordbot",
+  "name": "DiscordBot",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node main.js debug",
-    "start": "node main.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "grafpatron",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "ansi-colors": "^4.1.1",
     "canvas": "^2.6.1",
-    "colors": "1.4.0",
-    "discord.js": "^12.2.0",
-    "moment": "^2.27.0",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.5",
-    "table": "^5.4.6"
+    "discord.js": "^12.5.0",
+    "file-system": "^2.2.2",
+    "moment": "^2.29.1",
+    "path": "^0.12.7"
   }
 }

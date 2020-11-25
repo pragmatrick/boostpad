@@ -26,9 +26,8 @@ We recommend you to adapt our server's style, being:\n`+
 `<@${client.config.users.boostpad}> doesn't like to be abused, treat him like yourself :pleading_face:
 _or else he will be no longer be your friend 
 → <@&${client.config.roles.enemy}>/<@&${client.config.roles.egoist}> (role punishment)_`});
-            (await msg.channel.send(embed))//.react("✅");
+            (await msg.channel.send(embed));
             msg.delete();
         }
     }
 }
-//,{name: `\u200B`, value:`**ACCEPT THE RULES TO GET <@&${client.config.roles.verified}>**`}
