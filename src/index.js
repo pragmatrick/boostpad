@@ -10,7 +10,7 @@ const { registerCommands, registerEvents } = require('./utils/registry');
     client.config = JSON.parse(fs.readFileSync("config.json", "utf-8"));
     await registerEvents(client, '../events');
     await registerCommands(client, '../commands');
-    client.login(client.config.token);
+    client.login(process.env.token);
 })();
 
 // "canvas": "^2.6.1",
