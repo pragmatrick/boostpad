@@ -46,7 +46,7 @@ module.exports = async (client, messageReaction, user) => {
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        if (!msg.member) {  // if member who was reported already left the server
+        if (msg.member.deleted || msg.member.deleted) {  // if member who was reported already left the server
             const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
             try {
                 for (const reaction of userReactions.values()) {
