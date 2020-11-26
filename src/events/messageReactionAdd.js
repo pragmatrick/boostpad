@@ -9,14 +9,6 @@ module.exports = async (client, messageReaction, user) => {
 
     if (!msg.guild || user.bot) return;
 
-    // Reaction Roles
-    if (msg.channel.id === client.config.channels.rules
-        && messageReaction.emoji.name === "✅") {
-            await msg.guild.members.cache.get(user.id)
-            .roles.add(client.config.roles.verified);
-            messageReaction.users.remove(user);
-    }
-
     // Report System
     if (msg.channel.id === client.config.channels.report && user.id !== client.config.users.boostpad) {
         const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
@@ -53,7 +45,7 @@ module.exports = async (client, messageReaction, user) => {
         }
         return;
     }
-    if (messageReaction.emoji.id === client.config.report_emoji_id) {
+    if (messageReaction.emoji.id === client.config.emojis.report) {
         if (!msg.member) {  // if member who was reported already left the server
             const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
             try {

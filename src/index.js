@@ -13,5 +13,3 @@ const { registerCommands, registerEvents } = require('./utils/registry');
     await registerCommands(client, '../commands');
     client.login(process.env.token);
 })();
-
-// "canvas": "^2.6.1",
