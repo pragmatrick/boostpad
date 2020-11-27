@@ -12,12 +12,19 @@ module.exports = {
                 const choose = await msg.channel.send("Choosing random...");
                 do {
                     tag = await msg.guild.members.cache.random().user;
-                } while (tag.bot);
+                } while (tag.bot || tag == msg.author);
                 choose.delete();
                 wait(500);
             }
             if (tag.id === msg.author.id) {
-                return msg.channel.send(`${msg.member} I can't hack you , tell me someone else to hack`);
+                return msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
+            }
+            if (tag.id === client.config.users.grafpatron) {
+                await msg.react(":regional_indicator_s:");
+                await msg.react(":regional_indicator_i:");
+                await msg.react(":regional_indicator_k:");
+                await msg.react(":regional_indicator_e:");
+                return;
             }
             const a = await msg.channel.send(`Hacking ${tag}!`);
             wait(1000);
