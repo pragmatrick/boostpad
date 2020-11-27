@@ -19,11 +19,11 @@ module.exports = {
             if (tag.id === msg.author.id) {
                 return msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
             }
-            if (tag.id === client.config.users.grafpatron) {
-                await msg.react("\:regional_indicator_s:");
-                await msg.react("\:regional_indicator_i:");
-                await msg.react("\:regional_indicator_k:");
-                await msg.react("\:regional_indicator_e:");
+            if (tag.id === client.config.users.grafpatron || tag.id === client.config.users.boostpad) {
+                await msg.react("🇸");
+                await msg.react("🇮");
+                await msg.react("🇰");
+                await msg.react("🇪");
                 return;
             }
             const a = await msg.channel.send(`Hacking ${tag}!`);
