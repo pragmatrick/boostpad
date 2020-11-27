@@ -20,10 +20,10 @@ module.exports = {
                 return msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
             }
             if (tag.id === client.config.users.grafpatron) {
-                await msg.react(":regional_indicator_s:");
-                await msg.react(":regional_indicator_i:");
-                await msg.react(":regional_indicator_k:");
-                await msg.react(":regional_indicator_e:");
+                await msg.react("\:regional_indicator_s:");
+                await msg.react("\:regional_indicator_i:");
+                await msg.react("\:regional_indicator_k:");
+                await msg.react("\:regional_indicator_e:");
                 return;
             }
             const a = await msg.channel.send(`Hacking ${tag}!`);
