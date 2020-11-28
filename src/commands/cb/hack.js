@@ -19,7 +19,7 @@ module.exports = {
             if (tag.id === msg.author.id) {
                 return msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
             }
-            if (Object.values(client.config.users).includes(tag.id)) {
+            if (Object.values(client.config.admins).includes(tag.id)) {
                 await msg.react("🇸");
                 await msg.react("🇮");
                 await msg.react("🇰");
