@@ -1,10 +1,8 @@
 {
     "server_id":        "684300884905295880",
     "prefix":           "/",
-    "good_ping":        200,
-    "high_ping":        700,
 
-    "users": {
+    "admins": {
         "boostpad":     "736154776504631308",
         "grafpatron":   "516304621250019341",
         "not_a_bot":    "733994765405650965"

@@ -8,52 +8,8 @@ module.exports = async (client, messageReaction, user) => {
    
     if (!msg.guild || user.bot) return;
 
-    //Reaction Roles
-    if (msg.channel.id === client.config.channels.roles && msg.id === msg.channel.messages.cache.first().id) {
-        if (await msg.guild.members.cache.get(user.id).roles.cache.find(role => role.id === client.config.roles.verified)) {
-            switch (messageReaction.emoji.name)
-            {
-                case "💰":
-                    await msg.guild.members.cache.get(user.id)
-                    .roles.remove(client.config.roles.trader);
-                    return;
-                case "♟️":
-                    await msg.guild.members.cache.get(user.id)
-                    .roles.remove(client.config.roles.gm);
-                    return;
-            }
-            switch (messageReaction.emoji.id)
-            {
-                case client.config.emojis.gc:
-                    await msg.guild.members.cache.get(user.id)
-                    .roles.remove(client.config.roles.gc);
-                    return;
-                case client.config.emojis.r6:
-                    await msg.guild.members.cache.get(user.id)
-                    .roles.remove(client.config.roles.r6);
-                    return;
-                case client.config.emojis.impostor:
-                    await msg.guild.members.cache.get(user.id)
-                    .roles.remove(client.config.roles.impostor);
-                    return;
-            }
-        }
-        else {
-            deleteUsersReactions(msg, user);
-            await msg.guild.members.cache.get(user.id)
-                .roles.remove([
-                    client.config.roles.trader,
-                    client.config.roles.gc,
-                    client.config.roles.r6,
-                    client.config.roles.impostor,
-                    client.config.roles.gm
-                ]);
-            return;
-        }
-    }
-
+    //Report System
     if (messageReaction.emoji.id === client.config.report_emoji_id && !msg.member.hasPermission("ADMINISTRATOR")) {
-        //Report System
         const message = (await msg.guild.channels.cache.get(client.config.channels.report).messages.fetch())
         .find(message => message.embeds[0].fields[3].value === msg.id);
         const embed = new Discord.MessageEmbed(message.embeds[0])

@@ -23,7 +23,7 @@ _or else → warning_\n\u200B`},
 We recommend you to adapt our server's style, being:\n`+ 
 "``"+"<firstname> | <tag>"+"``" + "\n_or else → warning (+manual nickname change)_\n\u200B"},
                 {name: `${cb_icon} 4 — Don't abuse our Bot`, value: 
-`<@${client.config.users.boostpad}> doesn't like to be abused, treat him like yourself :pleading_face:
+`<@${client.config.admins.boostpad}> doesn't like to be abused, treat him like yourself :pleading_face:
 _or else he will be no longer be your friend 
 → <@&${client.config.roles.enemy}>/<@&${client.config.roles.egoist}> (role punishment)_`});
             (await msg.channel.send(embed));

@@ -13,15 +13,17 @@ module.exports = async (client, msg) => {
     }
     
     // checking for commands
-    if(msg.content.startsWith(client.config.prefix) && msg.content.length > client.config.prefix.length) {
-        let args = msg.content.slice(client.config.prefix.length).split(/ +/);
+    const prefix = client.config.prefix;
+    if(msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
+        let args = msg.content.slice(prefix.length).split(/ +/);
         let cmd = args.shift().toLowerCase();
         if (client.commands.get(cmd)) {
             if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
                 msg.react("👎");
                 return;
             }
-            client.commands.get(cmd)(client, msg, args, client.config);
+            client.commands.get(cmd)(client, msg, args);
+            // Sending cmd use to log
             const date = moment(msg.createdAt);
             const cmd_info = new Discord.MessageEmbed()
             .setColor(client.config.colors.blue)

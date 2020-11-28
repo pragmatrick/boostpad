@@ -10,7 +10,7 @@ module.exports = async (client, messageReaction, user) => {
     if (!msg.guild || user.bot) return;
 
     // Report System
-    if (msg.channel.id === client.config.channels.report && user.id !== client.config.users.boostpad) {
+    if (msg.channel.id === client.config.channels.report && user.id !== client.config.admins.boostpad) {
         const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
         if (message == undefined) {
             msg.reactions.removeAll(); 
@@ -46,15 +46,8 @@ module.exports = async (client, messageReaction, user) => {
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        if (msg.member.deleted || msg.member.deleted) {  // if member who was reported already left the server
-            const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
-            try {
-                for (const reaction of userReactions.values()) {
-                    await reaction.users.remove(user.id);
-                }
-            } catch (error) {
-                console.error('Failed to remove reaction for report on kicked/leaved member.');
-            }
+        if (msg.member || msg.member.deleted) {  // if member who was reported already left the server
+            deleteUsersReactions(msg, user);
             return;
         }                  
         if (msg.member.hasPermission("ADMINISTRATOR")) { // you cant report an admin
@@ -119,5 +112,16 @@ While waiting for a <@&${client.config.roles.super_mod}> or the <@&${client.conf
 you can start typing your question.\n
 To close the support-ticket, react with :lock:`)
         .then(explain_msg => explain_msg.react("🔒"));
+    }
+}
+
+async function deleteUsersReactions(msg, user) {
+    const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
+    try {
+        for (const reaction of userReactions.values()) {
+            await reaction.users.remove(user.id);
+        }
+    } catch (error) {
+        console.error('Failed to remove reactions.');
     }
 }

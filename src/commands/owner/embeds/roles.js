@@ -31,9 +31,9 @@ module.exports = {
 @everyone
 <@&${client.config.roles.lost}>\n\u200B`, inline: true},
             {name: "\u200B", value: 
-`| reserved for <@${client.config.users.grafpatron}>
-| reserved for <@${client.config.users.boostpad}>
-| reserved for <@${client.config.users.not_a_bot}>\n
+`| reserved for <@${client.config.admins.grafpatron}>
+| reserved for <@${client.config.admins.boostpad}>
+| reserved for <@${client.config.admins.not_a_bot}>\n
 | kick/move/mute members + bot privileges
 | kick/move/mute members
 | bot privileges\n

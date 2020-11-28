@@ -18,7 +18,7 @@ Just don't be a jerk and that will do it.\n\u200B`},
                 {name: `:two: Understand our roles`, value: 
 `<#${client.config.channels.roles}> are highly exclusive and you can only get them manually.\n\u200B`},
                 {name: `:three: Get to know our Bot`, value: 
-`<@${client.config.users.boostpad}> is our AI, which can automoderate, interact with users and do fun stuff. 
+`<@${client.config.admins.boostpad}> is our AI, which can automoderate, interact with users and do fun stuff. 
 There are some commands to discover, go check out <#${client.config.channels.bot_info}> and learn __how and when__ to use them.\n\u200B`},
                 {name: `:thinking: Still have questions?`, value: 
 `Here is a list of frequently asked questions: <#${client.config.channels.help}>
