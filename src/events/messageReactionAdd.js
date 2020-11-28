@@ -46,7 +46,7 @@ module.exports = async (client, messageReaction, user) => {
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        if (msg.member || msg.member.deleted) {  // if member who was reported already left the server
+        if (!msg.member || msg.member.deleted) {  // if member who was reported already left the server
             deleteUsersReactions(msg, user);
             return;
         }                  

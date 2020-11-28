@@ -14,7 +14,7 @@ module.exports = {
                 {name: `:thinking: Why are my messages getting deleted right after I sent them?`, value: 
 `Your message may violate our <#${client.config.channels.rules}>.\n\u200B`},
                 {name: `:thinking: Why are my messages getting a :thumbsdown: dislike instantly?`, value: 
-`You have been noticed lately for abusing <@${client.config.users.boostpad}> which gave you the role <@&${client.config.roles.enemy}>.
+`You have been noticed lately for abusing <@${client.config.admins.boostpad}> which gave you the role <@&${client.config.roles.enemy}>.
 This means he's no longer your friend and won't listen to your needs.\n\u200B`},
                 {name: `:thinking: Why can't I write any message?`, value: 
 `You have been noticed lately for not following our <#${client.config.channels.rules}> in chat rooms which gave you the role <@&${client.config.roles.stfu}>.
