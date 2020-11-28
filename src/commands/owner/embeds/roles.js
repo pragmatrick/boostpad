@@ -67,6 +67,7 @@ module.exports = {
 <@&${client.config.roles.gc}>
 <@&${client.config.roles.r6}>
 <@&${client.config.roles.gm}>`, inline: true},
+            {name: "__Gaming Roles__", value: justForFun},
             {name: `\u200B`, value: 
 `| <:${msg.guild.emojis.cache.get(client.config.emojis.cod).identifier}>
 | :moneybag:
@@ -77,4 +78,4 @@ module.exports = {
         await msg.channel.send(embed);
         msg.delete();
     }
-} 
+}
