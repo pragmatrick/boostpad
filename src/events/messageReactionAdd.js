@@ -4,9 +4,8 @@ const moment = require("moment");
 module.exports = async (client, messageReaction, user) => {
     // fetching message from outside cache
     if (messageReaction.partial) await messageReaction.fetch();
+    messageReaction.message.channel.messages.fetch();
     const msg = messageReaction.message;
-    if (msg.partial)             await messageReaction.message.fetch();
-    msg.member.fetch();
 
     if (!msg.guild || user.bot) return;
 
@@ -48,7 +47,7 @@ module.exports = async (client, messageReaction, user) => {
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
         if (!msg.member || msg.member.deleted) {  // if member who was reported already left the server
-            console.log(msg.member);
+            console.log(msg);
             deleteUsersReactions(msg, user);
             return;
         }                  
