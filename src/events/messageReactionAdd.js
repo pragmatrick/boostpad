@@ -6,6 +6,7 @@ module.exports = async (client, messageReaction, user) => {
     if (messageReaction.partial) await messageReaction.fetch();
     messageReaction.message.channel.messages.fetch();
     const msg = messageReaction.message;
+    msg.member.fetch();
 
     if (!msg.guild || user.bot) return;
 
