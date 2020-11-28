@@ -4,8 +4,8 @@ const moment = require("moment");
 module.exports = async (client, messageReaction, user) => {
     // fetching message from outside cache
     if (messageReaction.partial) await messageReaction.fetch();
-    messageReaction.message.channel.messages.fetch();
     const msg = messageReaction.message;
+    if (msg.partial)             await messageReaction.message.fetch();
     msg.member.fetch();
 
     if (!msg.guild || user.bot) return;
