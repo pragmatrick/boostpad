@@ -3,8 +3,8 @@ module.exports = (client, oldMember, newMember) => {
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
             console.log(channel);
-            if (channel){
-                if (channel.deletable && channel.members.size == 0) channel.delete().catch(err => console.log(err));
+            if (channel != null){
+                if (channel.deletable && channel.members.size == 0) channel.delete();
             }
         }
     });
