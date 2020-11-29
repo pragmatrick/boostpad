@@ -7,7 +7,7 @@ module.exports = {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
 
         let justForFun = "";
-        const server = client.guild.cache.get(client.config.server_id);
+        const server = client.guilds.cache.get(client.config.server_id);
         server.roles.cache.array().forEach(role => {
             if (!Object.values(client.config.roles).includes(role.id)) {
                 justForFun += `<@&${role}` + ", "
