@@ -58,7 +58,7 @@ async function registerEvents(client, dir) {
                 try {
                     let eventModule = require(path.join(__dirname, dir, file));
                     console.log(eventModule);
-                    client.on(eventName, eventModule.execute(null, client));
+                    client.on(eventName, eventModule.bind(null, client));
                     eventStatus.push(
                         [`${eventName}`, `✅Success`, `${eventModule.description}`]
                     )
