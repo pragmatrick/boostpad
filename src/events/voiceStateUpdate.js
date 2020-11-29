@@ -4,7 +4,7 @@ module.exports = (client, oldMember, newMember) => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
             console.log(channel);
             if (channel){
-                if (!channel.deleted && channel.members.size == 0) channel.delete().catch(err => console.log(err));
+                if (channel.deletable && channel.members.size == 0) channel.delete().catch(err => console.log(err));
             }
         }
     });
