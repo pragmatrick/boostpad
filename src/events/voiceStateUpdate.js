@@ -1,4 +1,6 @@
 module.exports = (client, oldMember, newMember) => {
+    if (oldMember.channel.deleted) return;
+    
     // Delete clear channels
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
