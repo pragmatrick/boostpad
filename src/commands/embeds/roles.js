@@ -65,14 +65,14 @@ module.exports = {
 <@&${client.config.roles.trader}>
 <@&${client.config.roles.gc}>
 <@&${client.config.roles.r6}>
-<@&${client.config.roles.gm}>`, inline: true},
+<@&${client.config.roles.gm}>\n\u200B`, inline: true},
             {name: `\u200B`, value: 
 `| <:${msg.guild.emojis.cache.get(client.config.emojis.cod).identifier}>
 | :moneybag:
 | <:${msg.guild.emojis.cache.get(client.config.emojis.gc).identifier}>
 | <:${msg.guild.emojis.cache.get(client.config.emojis.r6).identifier}>
 | <:${msg.guild.emojis.cache.get(client.config.emojis.impostor).identifier}>
-| :crown:`, inline: true},
+| :crown:\n\u200B`, inline: true},
             {name: "__Just For Fun__\n\u200B", value: justForFun});
         await msg.channel.send(embed);
         msg.delete();
