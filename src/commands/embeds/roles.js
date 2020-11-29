@@ -33,7 +33,7 @@ module.exports = {
 `| reserved for <@${client.config.admins.grafpatron}>
 | reserved for <@${client.config.admins.boostpad}>
 | reserved for <@${client.config.admins.not_a_bot}>\n
-| kick/move/mute members + bot privileges
+| kick/move/mute/ban members
 | kick/move/mute members
 | bot privileges\n
 | create invites, attach files, use external emojis
@@ -66,7 +66,7 @@ module.exports = {
 <@&${client.config.roles.gc}>
 <@&${client.config.roles.r6}>
 <@&${client.config.roles.gm}>`, inline: true},
-            {name: `\u200B\n\u200B`, value: 
+            {name: `\u200B`, value: 
 `| <:${msg.guild.emojis.cache.get(client.config.emojis.cod).identifier}>
 | :moneybag:
 | <:${msg.guild.emojis.cache.get(client.config.emojis.gc).identifier}>
