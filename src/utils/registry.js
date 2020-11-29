@@ -54,7 +54,6 @@ async function registerEvents(client, dir) {
                 let eventName = file.substring(0, file.indexOf(".js"));
                 try {
                     let eventModule = require(path.join(__dirname, dir, file));
-                    console.log(eventModule);
                     client.on(eventName, eventModule.bind(null, client));
                 }
                 catch(err) {

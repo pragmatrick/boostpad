@@ -3,7 +3,7 @@ const tableConfig                    = require("../utils/tableConfig");
 const { commandStatus } = require("../utils/registry");
 
 
-module.exports = (client) => {
+module.exports = async (client) => {
         console.log("----------------------------------------Boostpad was grabbed----------------------------------------");
 
         await client.guilds.cache.get(client.config.server_id).channels.cache.get(client.config.channels.help).messages.fetch();
