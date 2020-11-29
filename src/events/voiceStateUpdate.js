@@ -1,10 +1,10 @@
 module.exports = (client, oldMember, newMember) => {
-    if (oldMember.channel.deleted) return;
-    
+    if (oldMember.channel && oldMember.channel.deleted) return;
+
     // Delete clear channels
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
-            if (channel.members.size == 0 && !channel.deleted) channel.delete();
+            if (!channel.deleted && channel.members.size == 0) channel.delete();
         }
     });
     // Join to create VC
