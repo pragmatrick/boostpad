@@ -10,9 +10,9 @@ module.exports = {
         const server = client.guilds.cache.get(client.config.server_id);
         server.roles.cache.array().forEach(role => {
             if (!Object.values(client.config.roles).includes(role.id)) {
-                justForFun += `<@&${role}` + ", "
+                justForFun += `${role}` + ", ";
             } 
-        });     justForFun = justForFun.slice(0, -1);
+        });     justForFun = justForFun.slice(0, -2);
 
         const embed = new Discord.MessageEmbed()
         .attachFiles("./Pictures/Logos/RolesFire.png")
