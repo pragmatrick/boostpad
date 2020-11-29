@@ -62,15 +62,14 @@ module.exports = {
 | nobody will help you anymore :stuck_out_tongue_closed_eyes:\n
 | reserved for <@${client.config.users.berkay}>\n\u200B`, inline: true},
             {name: "__Just For Fun__", value: justForFun},
-            {name: "__Gaming Roles__", value: "\u200B"},
-            {name: `\u200B`, value: 
+            {name: "__Gaming Roles__\n\u200B", value: 
 `<@&${client.config.roles.cod}>
 <@&${client.config.roles.impostor}>
 <@&${client.config.roles.trader}>
 <@&${client.config.roles.gc}>
 <@&${client.config.roles.r6}>
 <@&${client.config.roles.gm}>`, inline: true},
-            {name: `\u200B`, value: 
+            {name: `\u200B\n\u200B`, value: 
 `| <:${msg.guild.emojis.cache.get(client.config.emojis.cod).identifier}>
 | :moneybag:
 | <:${msg.guild.emojis.cache.get(client.config.emojis.gc).identifier}>
