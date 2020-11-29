@@ -60,7 +60,7 @@ async function registerEvents(client, dir) {
                     console.log(eventModule);
                     client.on(eventName, eventModule.bind(null, client));
                     eventStatus.push(
-                        [`${eventName}`, `✅Success`, ``]
+                        [`${eventName}`, `✅Success`, `${eventModule.description}`]
                     )
                 }
                 catch(err) {

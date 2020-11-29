@@ -33,3 +33,7 @@ module.exports = async (client, oldMsg, msg) => {
         }
     }
 }
+
+module.exports = {
+    description: "test"
+}

@@ -20,3 +20,7 @@ module.exports = (client, oldMember, newMember) => {
         });
     }
 }
+
+module.exports = {
+    description: "test"
+}
