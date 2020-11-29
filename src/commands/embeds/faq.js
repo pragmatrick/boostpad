@@ -6,7 +6,7 @@ module.exports = {
     async execute(client, msg, args) {
         if (msg.member.hasPermission("ADMINISTRATOR")) {
             const embed = new Discord.MessageEmbed()
-            .attachFiles(["../Pictures/Logos/FaqFire.png"])
+            .attachFiles(["./Pictures/Logos/FaqFire.png"])
             .setColor(client.config.colors.gold)
             .addFields(
                 {name: `:thinking: Why can't I see some channels others can see?`, value: 

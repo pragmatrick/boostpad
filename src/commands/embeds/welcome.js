@@ -8,7 +8,7 @@ module.exports = {
             const insta = `<:${msg.guild.emojis.cache.get(client.config.emojis.instagram).identifier}>`;
             const cb = `<:${msg.guild.emojis.cache.get(client.config.emojis.cornerboost).identifier}>`
             const embed = new Discord.MessageEmbed()
-            .attachFiles(["../Pictures/Logos/WelcomeFire.png"])
+            .attachFiles(["./Pictures/Logos/WelcomeFire.png"])
             .setColor(client.config.colors.gold)
             .setTitle("__How to start at the official Cornerboost-Server:__")
             .addFields(
