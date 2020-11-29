@@ -9,8 +9,10 @@ module.exports = {
         justForFun = "\u200B\n"+
         `<@&${client.config.roles.magician}>`+", "+
         `<@&${client.config.roles.athlete}>`+", "+
+        `<@&${client.config.roles.sandmann}>`+", "+
         `<@&${client.config.roles.artist}>`+ ", "+
         `<@&${client.config.roles.communist}>`+", "+
+        `<@&${client.config.roles.musician}>`+", "+
         `<@&${client.config.roles.philosopher}>`+", "+
         `<@&${client.config.roles.drugs}>`+
         "\n\u200B";
