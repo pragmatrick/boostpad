@@ -58,7 +58,7 @@ module.exports = {
 | enjoy getting ignored and disrespected
 | nobody will help you anymore :stuck_out_tongue_closed_eyes:\n
 | reserved for <@${client.config.users.berkay}>\n\u200B`, inline: true},
-            {name: "__Gaming Roles__\n\u200B", value: "_group you into the associated communities._"},
+            {name: "__Gaming Roles__", value: "_group you into the associated communities._"},
             {name: `\u200B`, value:  
 `<@&${client.config.roles.cod}>
 <@&${client.config.roles.impostor}>
