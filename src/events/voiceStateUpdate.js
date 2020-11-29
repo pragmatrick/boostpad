@@ -12,8 +12,14 @@ module.exports = (client, oldMember, newMember) => {
             return;
         }
         const joinedChannel = newMember.channel;
-        joinedChannel.clone({name: client.config.create_channels.vc.name}).then(chan => {
-            newMember.setChannel(chan);
+        joinedChannel.clone({name: client.config.create_channels.vc.name}).then(channel => {
+            newMember.setChannel(channel);
+            channel.overwritePermissions(
+                {
+                    id: newMember.member.id,
+                    allow: ["MANAGE_CHANNELS"]
+                }
+            );
         }).catch(err => {
             console.log(err);
             newMember.kick();
