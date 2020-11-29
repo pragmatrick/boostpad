@@ -5,7 +5,7 @@ const commandStatus = [
     [`*Command*`, `*Status*`, `*Description*`]
 ];
 const eventStatus = [
-    [`*Event*`, `*Status*`, `*Fires on*`]
+    [`*Event*`, `*Status*`]
 ];
 
 async function registerCommands(client, dir) {
@@ -57,15 +57,16 @@ async function registerEvents(client, dir) {
                 let eventName = file.substring(0, file.indexOf(".js"));
                 try {
                     let eventModule = require(path.join(__dirname, dir, file));
+                    console.log(eventModeul);
                     client.on(eventName, eventModule.bind(null, client));
                     eventStatus.push(
-                        [`${eventName}`, `✅Success`, `${eventModule.description}`]
+                        [`${eventName}`, `✅Success`]
                     )
                 }
                 catch(err) {
                     console.log(err);
                     eventStatus.push(
-                        [`${eventName}`, `❌Failed`, '']
+                        [`${eventName}`, `❌Failed`]
                     );
                 }
             }
