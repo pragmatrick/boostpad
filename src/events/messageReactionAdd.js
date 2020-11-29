@@ -117,10 +117,6 @@ To close the support-ticket, react with :lock:`)
     }
 }
 
-module.exports = {
-    description: "test"
-}
-
 async function deleteUsersReactions(msg, user) {
     const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
     try {

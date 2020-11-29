@@ -18,10 +18,6 @@ module.exports = async (client, messageReaction, user) => {
     };
 }
 
-module.exports = {
-    description: "test"
-}
-
 async function deleteUsersReactions(msg, user) {
     const userReactions = msg.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
     try {

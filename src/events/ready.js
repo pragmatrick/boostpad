@@ -1,11 +1,9 @@
 const { createStream }               = require("table");
 const tableConfig                    = require("../utils/tableConfig");
-const { commandStatus, eventStatus } = require("../utils/registry");
+const { commandStatus } = require("../utils/registry");
 
 
-module.exports = {
-    description:    "test",
-    async execute (client) {
+module.exports = (client) => {
         console.log("----------------------------------------Boostpad was grabbed----------------------------------------");
 
         await client.guilds.cache.get(client.config.server_id).channels.cache.get(client.config.channels.help).messages.fetch();
@@ -14,8 +12,6 @@ module.exports = {
 
         await loadTable(commandStatus, 50);
         console.log("\n");
-        await loadTable(eventStatus, 50);
-    }
 }
 
 function loadTable(arr, interval) {
