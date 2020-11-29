@@ -16,7 +16,7 @@ module.exports = {
         "\n\u200B";
 
         const embed = new Discord.MessageEmbed()
-        .attachFiles("../Pictures/Logos/RolesFire.png")
+        .attachFiles("../../Pictures/Logos/RolesFire.png")
         .setColor(client.config.colors.red)
         .addFields(
             {name: "__Permission Roles__", value: "_define your rights on the server._"},
