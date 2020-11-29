@@ -3,16 +3,19 @@ const tableConfig                    = require("../utils/tableConfig");
 const { commandStatus, eventStatus } = require("../utils/registry");
 
 
-module.exports = async (client) => {
-    console.log("----------------------------------------Boostpad was grabbed----------------------------------------");
+module.exports = {
+    description:    "test",
+    async execute (client) {
+        console.log("----------------------------------------Boostpad was grabbed----------------------------------------");
 
-    await client.guilds.cache.get(client.config.server_id).channels.cache.get(client.config.channels.help).messages.fetch();
+        await client.guilds.cache.get(client.config.server_id).channels.cache.get(client.config.channels.help).messages.fetch();
 
-    client.user.setActivity(client.config.activity.object, {type: client.config.activity.doing}).catch(console.error);
+        client.user.setActivity(client.config.activity.object, {type: client.config.activity.doing}).catch(console.error);
 
-    await loadTable(commandStatus, 50);
-    console.log("\n");
-    await loadTable(eventStatus, 50);
+        await loadTable(commandStatus, 50);
+        console.log("\n");
+        await loadTable(eventStatus, 50);
+    }
 }
 
 function loadTable(arr, interval) {
@@ -30,8 +33,4 @@ function loadTable(arr, interval) {
             }
         }, interval); 
     })
-}
-
-module.exports = {
-    description: "test"
 }
