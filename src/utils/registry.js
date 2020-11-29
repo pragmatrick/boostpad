@@ -5,7 +5,7 @@ const commandStatus = [
     [`*Command*`, `*Status*`, `*Description*`]
 ];
 const eventStatus = [
-    [`*Event*`, `*Status*`]
+    [`*Event*`, `*Status*`, ``]
 ];
 
 async function registerCommands(client, dir) {
@@ -60,13 +60,13 @@ async function registerEvents(client, dir) {
                     console.log(eventModule);
                     client.on(eventName, eventModule.bind(null, client));
                     eventStatus.push(
-                        [`${eventName}`, `✅Success`]
+                        [`${eventName}`, `✅Success`, ``]
                     )
                 }
                 catch(err) {
                     console.log(err);
                     eventStatus.push(
-                        [`${eventName}`, `❌Failed`]
+                        [`${eventName}`, `❌Failed`, ``]
                     );
                 }
             }
