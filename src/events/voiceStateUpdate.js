@@ -19,12 +19,6 @@ module.exports = (client, oldMember, newMember) => {
                 ]
             }).then(channel => {
             newMember.setChannel(channel);
-            channel.overwritePermissions(
-                {
-                    id: newMember.member.id,
-                    allow: ["MANAGE_CHANNELS"]
-                }
-            );
         }).catch(err => {
             console.log(err);
             newMember.kick();
