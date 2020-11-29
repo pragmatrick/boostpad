@@ -6,16 +6,13 @@ module.exports = {
     async execute(client, msg, args) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
 
-        justForFun = "\u200B\n"+
-        `<@&${client.config.roles.magician}>`+", "+
-        `<@&${client.config.roles.athlete}>`+", "+
-        `<@&${client.config.roles.sandmann}>`+", "+
-        `<@&${client.config.roles.artist}>`+ ", "+
-        `<@&${client.config.roles.communist}>`+", "+
-        `<@&${client.config.roles.musician}>`+", "+
-        `<@&${client.config.roles.philosopher}>`+", "+
-        `<@&${client.config.roles.drugs}>`+
-        "\n\u200B";
+        let justForFun = "";
+        const server = client.guild.cache.get(client.config.server_id);
+        server.roles.cache.array().forEach(role => {
+            if (!Object.values(client.config.roles).includes(role.id)) {
+                justForFun += `<@&${role}` + ", "
+            } 
+        });     justForFun = justForFun.slice(0, -1);
 
         const embed = new Discord.MessageEmbed()
         .attachFiles("./Pictures/Logos/RolesFire.png")
@@ -61,7 +58,6 @@ module.exports = {
 | enjoy getting ignored and disrespected
 | nobody will help you anymore :stuck_out_tongue_closed_eyes:\n
 | reserved for <@${client.config.users.berkay}>\n\u200B`, inline: true},
-            {name: "__Just For Fun__", value: justForFun},
             {name: "__Gaming Roles__\n\u200B", value: 
 `<@&${client.config.roles.cod}>
 <@&${client.config.roles.impostor}>
@@ -75,7 +71,8 @@ module.exports = {
 | <:${msg.guild.emojis.cache.get(client.config.emojis.gc).identifier}>
 | <:${msg.guild.emojis.cache.get(client.config.emojis.r6).identifier}>
 | <:${msg.guild.emojis.cache.get(client.config.emojis.impostor).identifier}>
-| :crown:`, inline: true});
+| :crown:`, inline: true},
+            {name: "__Just For Fun__", value: justForFun});
         await msg.channel.send(embed);
         msg.delete();
     }
