@@ -13,6 +13,7 @@ module.exports = async (client) => {
         await loadTable(commandStatus, 50);
         console.log("\n");
         await loadTable(eventStatus, 50);
+        console.log("\n");
 }
 
 function loadTable(arr, interval) {

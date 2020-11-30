@@ -28,11 +28,9 @@ module.exports = async (client, msg) => {
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
-            if (msg.member.hasPermission("ADMINISTRATOR")) {
+            if (!msg.member.hasPermission("ADMINISTRATOR")) {
                 msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
-            } else {
-                msg.guild.channels.cache.get(client.config.channels.log_cmd).send(cmd_info);
-            }
+            } 
             if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
                 msg.react("👎");
                 return;

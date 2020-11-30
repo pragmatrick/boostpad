@@ -1,10 +1,4 @@
-Logging:
- - nickname changes
- - moving people
- - kick&bans
- - commands
-
- warn message at reports
+warn message at reports
 
  /tell <id> oneword
  -> answering with regional_indicators
