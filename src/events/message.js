@@ -18,11 +18,6 @@ module.exports = async (client, msg) => {
         let args = msg.content.slice(prefix.length).split(/ +/);
         let cmd = args.shift().toLowerCase();
         if (client.commands.get(cmd)) {
-            if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
-                msg.react("👎");
-                return;
-            }
-            client.commands.get(cmd)(client, msg, args);
             // Sending cmd use to log
             const date = moment(msg.createdAt);
             const cmd_info = new Discord.MessageEmbed()
@@ -33,10 +28,16 @@ module.exports = async (client, msg) => {
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
-            if (msg.member.hasPermission("ADMINISTRATOR"))
+            if (msg.member.hasPermission("ADMINISTRATOR")) {
                 msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
-            else
+            } else {
                 msg.guild.channels.cache.get(client.config.channels.log_cmd).send(cmd_info);
+            }
+            if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
+                msg.react("👎");
+                return;
+            }
+            client.commands.get(cmd)(client, msg, args);
         }
     }
 };

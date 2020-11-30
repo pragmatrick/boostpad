@@ -39,6 +39,8 @@ module.exports = {
             wait(500);
             let random = Math.floor(Math.random() * 500 ) + 500;
             const e = await d.edit(`${tag}'s boost sold for ${random}xcredits to Psyonix.`);
+        } else {
+            msg.react("🤨");
         }
     }
 }

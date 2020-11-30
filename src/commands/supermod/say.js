@@ -9,6 +9,8 @@ module.exports = {
             });
             msg.channel.send(answer);
             msg.delete();
+        } else {
+            msg.react("🤨");
         }
     }
 }

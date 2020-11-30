@@ -9,6 +9,8 @@ module.exports = {
             });
             msg.channel.send("**"+answer.toUpperCase()+"**");
             msg.delete();
+        } else {
+            msg.react("🤨");
         }
     }
 }

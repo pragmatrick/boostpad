@@ -3,6 +3,7 @@ module.exports = {
     description: "Makes the bot react to a message with certain emojis.",
     async execute (client, msg, args) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
+        
         if (args.length > 1) {
             msg.delete();
             return;

@@ -4,7 +4,10 @@ module.exports = {
     aliases: [],
     description: "Posts the roles-embed.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) return;
+        if (!msg.member.hasPermission("ADMINISTRATOR")) {
+            msg.react("🤨");
+            return;
+        }
 
         let justForFun = "";
         const server = client.guilds.cache.get(client.config.server_id);
