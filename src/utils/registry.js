@@ -4,6 +4,9 @@ const { checkCommandModule, checkProperties } = require('./validate');
 const commandStatus = [
     [`*Command*`, `*Status*`, `*Description*`]
 ];
+const eventStatus = [
+    [`*Event*`, `*Status*`, ``]
+];
 
 async function registerCommands(client, dir) {
     let files = await fs.readdir(path.join(__dirname, dir));
@@ -25,7 +28,7 @@ async function registerCommands(client, dir) {
                             if(aliases.length !== 0)
                                 aliases.forEach(alias => client.commands.set(alias, cmdModule.execute));
                             commandStatus.push(
-                                [`${cmdName}`, `✅Success`, `${cmdModule.description}`]
+                                [`${cmdName}`, `✅ Success`, `${cmdModule.description}`]
                             )
                         }
                     }
@@ -33,7 +36,7 @@ async function registerCommands(client, dir) {
                 catch(err) {
                     console.log(err);
                     commandStatus.push(
-                        [`${cmdName}`, `❌Failed`, '⬅']
+                        [`${cmdName}`, `❌ Failed`, '⬅']
                     );
                 }
             }
@@ -55,9 +58,15 @@ async function registerEvents(client, dir) {
                 try {
                     let eventModule = require(path.join(__dirname, dir, file));
                     client.on(eventName, eventModule.bind(null, client));
+                    eventStatus.push(
+                        [`${eventName}`, `✅ Success`, `${eventModule.description}`]
+                    )
                 }
                 catch(err) {
                     console.log(err);
+                    eventStatus.push(
+                        [`${eventName}`, `❌ Failed`, ``]
+                    );
                 }
             }
         }
@@ -66,6 +75,7 @@ async function registerEvents(client, dir) {
 
 module.exports = { 
     commandStatus,
+    eventStatus,
     registerEvents, 
     registerCommands 
 };

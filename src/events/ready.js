@@ -1,6 +1,6 @@
 const { createStream }               = require("table");
 const tableConfig                    = require("../utils/tableConfig");
-const { commandStatus } = require("../utils/registry");
+const { commandStatus, eventStatus } = require("../utils/registry");
 
 
 module.exports = async (client) => {
@@ -12,6 +12,7 @@ module.exports = async (client) => {
 
         await loadTable(commandStatus, 50);
         console.log("\n");
+        await loadTable(eventStatus, 50);
 }
 
 function loadTable(arr, interval) {
