@@ -9,6 +9,10 @@ module.exports = async (client, messageReaction, user) => {
 
     if (!msg.guild || user.bot) return;
 
+    msg.guild.members.fetch();
+
+    console.log(msg.member.id);
+
     // Report System
     if (msg.channel.id === client.config.channels.report && user.id !== client.config.admins.boostpad) {
         const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
@@ -46,11 +50,11 @@ module.exports = async (client, messageReaction, user) => {
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        if (msg.member==null || msg.member.deleted) {  // if member who was reported already left the server
-            console.log(msg.member.deleted);
+        /*if (msg.member==null || msg.member.deleted) {  // if member who was reported already left the server
+            console.log(msg.member==null);
             deleteUsersReactions(msg, user);
             return;
-        }                  
+        } */                 
         if (msg.member.hasPermission("ADMINISTRATOR")) { // you cant report an admin
             console.log("admin!");
             const r = msg.reactions.cache.find(r => r.emoji.name == client.config.report_emoji);
