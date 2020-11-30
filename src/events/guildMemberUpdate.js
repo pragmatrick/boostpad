@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = (client, oldMember, newMember) => {
-    console.log("trg update");
+    console.log("trg MemberUpdate");
     if (oldMember.nickname === newMember.nickname) return;
     
     const embed = new Discord.MessageEmbed()

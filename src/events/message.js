@@ -33,7 +33,10 @@ module.exports = async (client, msg) => {
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
-            msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
+            if (msg.member.hasPermission("ADMINISTRATOR"))
+                msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
+            else
+                msg.guild.channels.cache.get(client.config.channels.log_cmd).send(cmd_info);
         }
     }
 };

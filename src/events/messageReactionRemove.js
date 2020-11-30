@@ -9,7 +9,7 @@ module.exports = async (client, messageReaction, user) => {
     if (!msg.guild || user.bot) return;
 
     //Report System
-    if (messageReaction.emoji.id === client.config.report_emoji_id && !msg.member.hasPermission("ADMINISTRATOR")) {
+    if (messageReaction.emoji.id === client.config.emojis.report && !msg.member.hasPermission("ADMINISTRATOR")) {
         const message = (await msg.guild.channels.cache.get(client.config.channels.report).messages.fetch())
         .find(message => message.embeds[0].fields[3].value === msg.id);
         const embed = new Discord.MessageEmbed(message.embeds[0])

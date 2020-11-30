@@ -9,21 +9,51 @@ module.exports = async (client, messageReaction, user) => {
 
     if (!msg.guild || user.bot) return;
 
-    msg.guild.members.fetch();
+    // Support Ticket
+    if (msg.channel.parentID === client.config.channels.support && msg.author.bot && messageReaction.emoji.name === "🔒") {
+        msg.channel.delete().catch(err => console.log("couldn't delete support channel"));
+        return;
+    }
 
-    console.log(msg.member.id);
+    // EGOISM PROTECTION
+    if ((await msg.guild.members.fetch(user.id)).roles.cache.get(client.config.roles.egoist)) {
+        messageReaction.users.remove(user);
+        return;
+    }
+
+    if (msg.channel.id === client.config.channels.help && messageReaction.emoji.name === "📩") {
+        messageReaction.users.remove(user);
+        if (msg.guild.channels.cache.find(channel => channel.name === user.id)) return;
+        const sup_channel = await msg.guild.channels.create(
+            user.id, {type: "text", parent: client.config.channels.support,
+                permissionOverwrites: [
+                    {id: user.id, allow: ["VIEW_CHANNEL"]},
+                    {id: client.config.roles.everyone, deny: ["VIEW_CHANNEL", "ADD_REACTIONS"]},
+                    {id: client.config.roles.verified, deny: ["CREATE_INSTANT_INVITE"]},
+                    {id: client.config.roles.super_mod, allow: ["VIEW_CHANNEL"]},
+                ]}
+        )
+        sup_channel.send(`${user}, support will be with you shortly.
+While waiting for a <@&${client.config.roles.super_mod}> or the <@&${client.config.roles.owner}>, 
+you can start typing your question.\n
+To close the support-ticket, react with :lock:`)
+        .then(explain_msg => explain_msg.react("🔒"));
+    }
 
     // Report System
+    if(!(await msg.guild.members.fetch(msg.author.id).catch(() => null))) return;
+
     if (msg.channel.id === client.config.channels.report && user.id !== client.config.admins.boostpad) {
         const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
         if (message == undefined) {
+            console.log("trg undefined");
             msg.reactions.removeAll(); 
             return;
         }
         switch (messageReaction.emoji.name) 
         {
             case "✅":
-                const msgReactions = message.reactions.cache.get(client.config.report_emoji_id);
+                const msgReactions = await message.reactions.cache.get(client.config.emojis.report);
                 if (msgReactions != undefined) {
                     msgReactions.remove();
                 }
@@ -36,8 +66,6 @@ module.exports = async (client, messageReaction, user) => {
             case "⚠":
                 // Warn Message
                 if (!message.deleted) message.delete();
-                await msg.guild.members.cache.get(message.member.id)
-                    .roles.remove([client.config.roles.verified]);
                 msg.delete();
                 break;
             case "🔇":
@@ -50,11 +78,11 @@ module.exports = async (client, messageReaction, user) => {
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        /*if (msg.member==null || msg.member.deleted) {  // if member who was reported already left the server
+        if (msg.member.deleted) {  // if member who was reported already left the server
             console.log(msg.member==null);
             deleteUsersReactions(msg, user);
             return;
-        } */                 
+        }                  
         if (msg.member.hasPermission("ADMINISTRATOR")) { // you cant report an admin
             console.log("admin!");
             const r = msg.reactions.cache.find(r => r.emoji.name == client.config.report_emoji);
@@ -92,32 +120,6 @@ module.exports = async (client, messageReaction, user) => {
                 console.error("Failed to react to a report embed");
             }
         } 
-    }
-
-    // Support Ticket
-    if (msg.channel.parentID === client.config.channels.support 
-        && msg.author.bot && messageReaction.emoji.name === "🔒") {
-        msg.channel.delete().catch(err => console.log("couldn't delete support channel"));
-        return;
-    }
-    if (msg.channel.id === client.config.channels.help
-        && messageReaction.emoji.name === "📩") {
-        messageReaction.users.remove(user);
-        if (msg.guild.channels.cache.find(channel => channel.name === user.id)) return;
-        const sup_channel = await msg.guild.channels.create(
-            user.id, {type: "text", parent: client.config.channels.support,
-                permissionOverwrites: [
-                    {id: user.id, allow: ["VIEW_CHANNEL"]},
-                    {id: client.config.roles.everyone, deny: ["VIEW_CHANNEL", "ADD_REACTIONS"]},
-                    {id: client.config.roles.verified, deny: ["CREATE_INSTANT_INVITE"]},
-                    {id: client.config.roles.super_mod, allow: ["VIEW_CHANNEL"]},
-                ]}
-        )
-        sup_channel.send(`${user}, support will be with you shortly.
-While waiting for a <@&${client.config.roles.super_mod}> or the <@&${client.config.roles.owner}>, 
-you can start typing your question.\n
-To close the support-ticket, react with :lock:`)
-        .then(explain_msg => explain_msg.react("🔒"));
     }
 }
 
