@@ -36,8 +36,8 @@ module.exports = {
 | kick/move/mute/ban members
 | kick/move/mute members
 | bot privileges\n
-| create invites, attach files, use external emojis
-| write & talk
+| embed links, attach files
+| write & talk, invite people
 | you will be able to see only 2 channels\n\u200B`, inline: true},
             {name: "__Exclusive Roles__", value: "_make you part of the server elite._"},
             {name: `\u200B`, value: 
