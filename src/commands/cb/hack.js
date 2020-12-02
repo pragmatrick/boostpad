@@ -11,8 +11,8 @@ module.exports = {
                 }
                 const choose = await msg.channel.send("Choosing random...");
                 do {
-                    tag = await msg.guild.members.cache.random().user;
-                } while (tag.bot || tag == msg.author);
+                    tag = await msg.guild.members.cache.random();
+                } while (tag.user.bot || tag === msg.member);
                 choose.delete();
                 wait(500);
             }
