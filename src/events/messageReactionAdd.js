@@ -102,7 +102,7 @@ To close the support-ticket, react with :lock:`)
             .setColor(client.config.colors.red)
             .setThumbnail( msg.member.user.displayAvatarURL())
             .setDescription(`§ Report on ${msg.member}`)
-            .setFooter(`📝written on ${date.format("ddd Do MMM YYYY HH:mm")}`)
+            .setFooter(`📝written on ${date.format("ddd MMM Do YYYY LT")}`)
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Amount", value: messageReaction.count, inline: true},
