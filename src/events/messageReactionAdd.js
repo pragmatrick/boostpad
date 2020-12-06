@@ -11,7 +11,9 @@ module.exports = async (client, messageReaction, user) => {
 
     // Support Ticket
     if (msg.channel.parentID === client.config.channels.support && msg.author.bot && messageReaction.emoji.name === "🔒") {
-        msg.channel.delete().catch(err => console.log("couldn't delete support channel"));
+        try {
+            await msg.channel.delete();
+        } catch (err) {}
         return;
     }
 
@@ -65,6 +67,21 @@ To close the support-ticket, react with :lock:`)
                 break;
             case "⚠":
                 // Warn Message
+                const date = moment(message.createdAt);
+                const warnEmbed = new Discord.MessageEmbed()
+                    .setColor(client.config.colors.red)
+                    .setDescription(`§ WARNING`)
+                    .addFields(
+                        {name: "Message", value: `[${message.cleanContent}](${message.url})`, inline: false},
+                        {name: "Channel", value: `<#${message.channel.id}>`, inline: true},
+                        {name: "Timestamp", value: date.format("ddd MMM Do YYYY HH:mm"), inline: true},
+                        {name: `This warning was caused by our community that reported your message.`, value: 
+`Our staff's review resulted in giving you another chance.
+Please read our <#${client.config.channels.rules}> carefully again and check out <#${client.config.channels.help}>.
+__We hope you will refrain from such behaviour__. 
+Otherwise you will be **kicked** or even **banned** from the server.`, inline: false});
+                const dm = await message.author.createDM();
+                dm.send(warnEmbed);
                 if (!message.deleted) message.delete();
                 msg.delete();
                 break;
@@ -102,7 +119,7 @@ To close the support-ticket, react with :lock:`)
             .setColor(client.config.colors.red)
             .setThumbnail( msg.member.user.displayAvatarURL())
             .setDescription(`§ Report on ${msg.member}`)
-            .setFooter(`📝written on ${date.tz("Europe/Berlin").format("ddd MMM Do YYYY HH:mm")}`)
+            .setFooter(`📝written on ${date.format("ddd MMM Do YYYY HH:mm")}`)
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Amount", value: messageReaction.count, inline: true},
