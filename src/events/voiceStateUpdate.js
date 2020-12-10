@@ -7,7 +7,7 @@ module.exports = (client, oldMember, newMember) => {
     });
     // Join to create VC
     if (newMember.channelID === client.config.create_channels.vc.id) {
-        if (newMember.member.roles.cache.find(role => role.id === client.config.roles.enemy)) {
+        if (newMember.member.roles.cache.get(client.config.roles.enemy)) {
             newMember.kick();
             return;
         }
