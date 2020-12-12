@@ -5,6 +5,7 @@ module.exports = (client, oldMember, newMember) => {
             if (channel.deletable && channel.members.size == 0) channel.delete().catch(err => {});
         }
     });
+
     // Join to create VC
     if (newMember.channelID === client.config.create_channels.vc.id) {
         if (newMember.member.roles.cache.get(client.config.roles.enemy)) {
