@@ -37,13 +37,18 @@ To be executed, your message must contain the command **only**.
 They will often change, new ones will come, others will go...`},
             {name: `Command Name`, value:
 "`/hack <@user>` \n"+
-"`/coinflip` or `/boost`", inline: true},
+"`/coinflip` or `/boost` \n"+
+"`/nudge <@user>` \n" +
+"`/gif <keywords>`", inline: true},
             {name: `Output`, value:
 `steels a user's boost
-<:${msg.guild.emojis.cache.get(bb_cf).identifier}> or <:${msg.guild.emojis.cache.get(sm_cf).identifier}>`
-                            , inline: true},
+<:${msg.guild.emojis.cache.get(bb_cf).identifier}> or <:${msg.guild.emojis.cache.get(sm_cf).identifier}>
+deletes your message
+sends a gif` , inline: true},
             {name: `Role required`, value:
 `<@&${client.config.roles.cb}>
+@everyone
+@everyone
 @everyone`, inline: true},
     );
         msg.channel.send(embed);
