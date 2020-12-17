@@ -12,6 +12,7 @@
     "discord.js": "^12.5.1",
     "file-system": "^2.2.2",
     "moment": "^2.29.1",
+    "node-fetch": "^2.6.1",
     "path": "^0.12.7",
     "table": "^6.0.4"
   }

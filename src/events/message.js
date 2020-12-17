@@ -24,7 +24,7 @@ module.exports = async (client, msg) => {
             .setColor(client.config.colors.blue)
             .setThumbnail(msg.member.user.displayAvatarURL())
             .setDescription(`§ CMD used by ${msg.member}`)
-            .setFooter(`📝written on ${date.format("ddd MMM MM YYYY k:mm")}`)
+            .setFooter(`📝written on ${date.format("ddd D MMM YYYY k:mm")}`)
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
