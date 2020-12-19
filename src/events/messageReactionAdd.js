@@ -115,13 +115,14 @@ Otherwise you will be **kicked** or even **banned** from the server.`, inline: f
         } 
         else {    // if not create a new report
             const date = moment(msg.createdAt);
+            const content = msg.cleanContent == "" ? "<...>" : msg.cleanContent;
             const embed = new Discord.MessageEmbed()
             .setColor(client.config.colors.red)
             .setThumbnail( msg.member.user.displayAvatarURL())
             .setDescription(`§ Report on ${msg.member}`)
             .setFooter(`📝written on ${date.format("ddd MMM Do YYYY HH:mm")}`)
             .addFields(
-                {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
+                {name: "Message", value: `[${content}](${msg.url})`, inline: false},
                 {name: "Amount", value: messageReaction.count, inline: true},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: true},
                 {name: "Message ID", value: msg.id, inline: false});

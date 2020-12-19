@@ -1,3 +1,6 @@
+const moment = require("moment");
+const Discord = require("discord.js");
+
 module.exports = (client, oldMember, newMember) => {
     // Delete clear channels
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
@@ -13,8 +16,10 @@ module.exports = (client, oldMember, newMember) => {
             return;
         }
         const joinedChannel = newMember.channel;
+        const nickname = newMember.member.nickname;;
+        const name = nickname.split(/ +/)[0];
         joinedChannel.clone({
-                name: client.config.create_channels.vc.name,
+                name: "Have you met "+name+"?", //client.config.create_channels.vc.name
                 permissionOverwrites: [
                     {id: newMember.member.id, allow: ["MANAGE_CHANNELS", "MANAGE_ROLES"]}
                 ]
@@ -23,6 +28,14 @@ module.exports = (client, oldMember, newMember) => {
         }).catch(err => {
             console.log(err);
             newMember.kick();
-        });
+        });        
+        // Sending cmd use to log
+        const date = moment();
+        const cmd_info = new Discord.MessageEmbed()
+        .setColor(client.config.colors.blue)
+        .setThumbnail(newMember.member.user.displayAvatarURL())
+        .setDescription(`§ VC created by ${newMember.member}`)
+        .setFooter(`🗣 done on ${date.format("ddd D MMM YYYY k:mm")}`);
+        newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info).catch(err => {});
     }
 }

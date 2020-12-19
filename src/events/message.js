@@ -18,24 +18,25 @@ module.exports = async (client, msg) => {
         let args = msg.content.slice(prefix.length).split(/ +/);
         let cmd = args.shift().toLowerCase();
         if (client.commands.get(cmd)) {
+            let verb;
+            if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
+                msg.react("👎");
+                verb = "denied from";
+            } else {
+                client.commands.get(cmd)(client, msg, args);
+                verb = "used by";
+            }
             // Sending cmd use to log
             const date = moment(msg.createdAt);
             const cmd_info = new Discord.MessageEmbed()
             .setColor(client.config.colors.blue)
             .setThumbnail(msg.member.user.displayAvatarURL())
-            .setDescription(`§ CMD used by ${msg.member}`)
+            .setDescription(`👾 CMD ${verb} ${msg.member}`)
             .setFooter(`📝written on ${date.format("ddd D MMM YYYY k:mm")}`)
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
-            if (!msg.member.hasPermission("ADMINISTRATOR")) {
-                msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
-            } 
-            if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
-                msg.react("👎");
-                return;
-            }
-            client.commands.get(cmd)(client, msg, args);
+            msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
         }
     }
 };
