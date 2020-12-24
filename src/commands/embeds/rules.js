@@ -21,7 +21,7 @@ _or else → <@&${client.config.roles.stfu}> (role punishment → mute)_\n\u200B
 `We have dedicated gaming channels, talk channels, jam & chat rooms.
 Self promotion is __nowhere__ allowed.
 _or else → warning_\n\u200B`},
-            {name: `${cb_icon} 3 — Your name must be readable, mentionable and appropriate`, value: 
+            {name: `${cb_icon} 3 — Your name must be readable, mentionable, and appropriate`, value: 
 `This means that names should not contain digits only, characters that cannot be easily typed on a regular keyboard, excessive use of symbols, etc.
 We recommend you to adapt our server's style, being:\n`+ 
 "``"+"<firstname> | <tag>"+"``" + "\n_or else → warning (+manual nickname change)_\n\u200B"},
