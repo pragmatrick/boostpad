@@ -1,7 +1,7 @@
 const moment = require("moment");
 const Discord = require("discord.js");
 
-module.exports = (client, oldMember, newMember) => {
+module.exports = async (client, oldMember, newMember) => {
     // Delete clear channels
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
