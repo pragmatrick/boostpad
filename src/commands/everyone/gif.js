@@ -2,7 +2,7 @@ const fetch = require("node-fetch")
 
 module.exports = {
     aliases:  ["stupse"],
-    description: "Nudges a user.",
+    description: "Posts a gif in the memes channel.",
     async execute(client, msg, args) {
         const token = process.env.tenor
         if (msg.channel.id === client.config.channels.memes || msg.member.roles.cache.get(client.config.roles.vip)) {
