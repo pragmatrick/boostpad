@@ -12,6 +12,23 @@ module.exports = async (client, msg) => {
         return;
     }
     
+    if (msg.channel.id === client.config.channels.umfragen) {
+        if (!msg.cleanContent.endsWith("?")) {
+            msg.delete();
+        } else {
+            await msg.react("👍🏼");
+            await msg.react("👎🏼");
+            await msg.react("🇽");
+            await msg.react("🇦");
+            await msg.react("🇧");
+            await msg.react("🇩");
+            await msg.react("🇪");
+            await msg.react("🇵");
+            await msg.react("🇹");
+        }
+        return;
+    }
+
     // checking for commands
     const prefix = client.config.prefix;
     if(msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
