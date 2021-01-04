@@ -3,9 +3,13 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
-    description: "Creates for a user a custom welcome-image.",
+    description: "Greets a new user.",
     async execute(client, msg, args) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
+        const member = msg.mentions.members.first();
+        await msg.delete();
+        if (member == null) return;
+        client.emit("guildMemberAdd", member);
         /*
         const applyText = (canvas, text) => {
             const ctx = canvas.getContext("2d");
