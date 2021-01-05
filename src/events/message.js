@@ -16,15 +16,17 @@ module.exports = async (client, msg) => {
         if (!msg.cleanContent.endsWith("?")) {
             msg.delete();
         } else {
-            await msg.react("👍🏼");
-            await msg.react("👎🏼");
-            await msg.react("🇽");
-            await msg.react("🇦");
-            await msg.react("🇧");
-            await msg.react("🇩");
-            await msg.react("🇪");
-            await msg.react("🇵");
-            await msg.react("🇹");
+            try {
+                await msg.react("👍🏼");
+                await msg.react("👎🏼");
+                await msg.react("🇽");
+                await msg.react("🇦");
+                await msg.react("🇧");
+                await msg.react("🇩");
+                await msg.react("🇪");
+                await msg.react("🇵");
+                await msg.react("🇹");
+            } catch (err) {}
         }
         return;
     }
