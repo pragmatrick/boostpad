@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports = (client, oldMember, newMember) => {
+module.exports = (client, oldMember, newMember) => {/*
     console.log("trg MemberUpdate");
     if (oldMember.nickname === newMember.nickname) return;
     
@@ -12,5 +12,5 @@ module.exports = (client, oldMember, newMember) => {
         .addFields(
             {name: "from", value: oldMember.nickname, inline: true},
             {name: "to", value: newMember.nickname, inline: true});
-    msg.guild.channels.cache.get(client.config.channels.log_names).send(embed);
+    msg.guild.channels.cache.get(client.config.channels.log).send(embed);*/
 }
