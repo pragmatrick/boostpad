@@ -10,7 +10,7 @@ module.exports = {
         }
         const cb_icon = `<:${msg.guild.emojis.cache.get(client.config.emojis.cornerboost).identifier}>`
         const embed = new Discord.MessageEmbed()
-        .attachFiles(["./Pictures/Logos/RulesFire.png"])
+        .attachFiles("../Pictures/Logos/RulesFire.png")
         .setColor(client.config.colors.green)
         .addFields(
             {name: `${cb_icon} 1 — Use common sense`, value: 

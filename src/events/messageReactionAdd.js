@@ -32,12 +32,11 @@ module.exports = async (client, messageReaction, user) => {
                     {id: user.id, allow: ["VIEW_CHANNEL"]},
                     {id: client.config.roles.everyone, deny: ["VIEW_CHANNEL", "ADD_REACTIONS"]},
                     {id: client.config.roles.verified, deny: ["CREATE_INSTANT_INVITE"]},
-                    {id: client.config.roles.super_mod, allow: ["VIEW_CHANNEL"]},
+                    {id: client.config.roles.supporter, allow: ["VIEW_CHANNEL"]},
                 ]}
         )
         sup_channel.send(`${user}, support will be with you shortly.
-While waiting for a <@&${client.config.roles.super_mod}> or the <@&${client.config.roles.owner}>, 
-you can start typing your question.\n
+While waiting for a <@&${client.config.roles.supporter}>, you can start typing your question.\n
 To close the support-ticket, react with :lock:`)
         .then(explain_msg => explain_msg.react("🔒"));
     }
@@ -52,6 +51,7 @@ To close the support-ticket, react with :lock:`)
             msg.reactions.removeAll(); 
             return;
         }
+        const date = moment(message.createdAt);
         switch (messageReaction.emoji.name) 
         {
             case "✅":
@@ -67,7 +67,6 @@ To close the support-ticket, react with :lock:`)
                 break;
             case "⚠":
                 // Warn Message
-                const date = moment(message.createdAt);
                 const warnEmbed = new Discord.MessageEmbed()
                     .setColor(client.config.colors.red)
                     .setDescription(`§ WARNING`)
@@ -80,15 +79,31 @@ To close the support-ticket, react with :lock:`)
 Please read our <#${client.config.channels.rules}> carefully again and check out <#${client.config.channels.help}>.
 __We hope you will refrain from such behaviour__. 
 Otherwise you will be **kicked** or even **banned** from the server.`, inline: false});
-                const dm = await message.author.createDM();
-                dm.send(warnEmbed);
+                const dm1 = await message.author.createDM();
+                dm1.send(warnEmbed);
+                sendPunishment("WARNING", client, message, date, client.config.colors.olive);
                 if (!message.deleted) message.delete();
                 msg.delete();
                 break;
             case "🔇":
+                // Mute Message
+                const muteEmbed = new Discord.MessageEmbed()
+                    .setColor(client.config.colors.red)
+                    .setDescription(`§ MUTE PENALTY`)
+                    .addFields(
+                        {name: "Message", value: `[${message.cleanContent}](${message.url})`, inline: false},
+                        {name: "Channel", value: `<#${message.channel.id}>`, inline: true},
+                        {name: "Timestamp", value: date.format("ddd MMM Do YYYY HH:mm"), inline: true},
+                        {name: `This penalty was caused by our community that reported your message.`, value: 
+`Our staff's review resulted in muting you for an undefined time.
+Please read our <#${client.config.channels.rules}> carefully again and try to understand your fault.
+However you will get a second chance. **In one month** you will have to take a support ticket at <#${client.config.channels.help}> to apologize.
+__Abusing the support system will cause a permanent ban__.`, inline: false});
+                const dm2 = await message.author.createDM();
+                dm2.send(muteEmbed);
+                sendPunishment("MUTE PENALTY", client, message, date, client.config.colors.red);
                 if (!message.deleted) message.delete();
                 message.member.roles.add(message.guild.roles.cache.get(client.config.roles.stfu));
-                message.delete();
                 msg.delete();
                 break;
         }
@@ -118,7 +133,7 @@ Otherwise you will be **kicked** or even **banned** from the server.`, inline: f
             const content = msg.cleanContent == "" ? "<...>" : msg.cleanContent;
             const embed = new Discord.MessageEmbed()
             .setColor(client.config.colors.red)
-            .setThumbnail( msg.member.user.displayAvatarURL())
+            .setThumbnail(msg.member.user.displayAvatarURL())
             .setDescription(`§ Report on ${msg.member}`)
             .setFooter(`📝written on ${date.format("ddd MMM Do YYYY HH:mm")}`)
             .addFields(
@@ -139,6 +154,19 @@ Otherwise you will be **kicked** or even **banned** from the server.`, inline: f
             }
         } 
     }
+}
+
+async function sendPunishment(title, client, message, date, color) {
+    const punishment = new Discord.MessageEmbed()
+        .setColor(color)
+        .setDescription(`§ ${title} -> ${message.member}`)
+        .setThumbnail(message.member.user.displayAvatarURL())
+        .addFields(
+            {name: "Message", value: `[${message.cleanContent}](${message.url})`, inline: false},
+            {name: "Channel", value: `<#${message.channel.id}>`, inline: true},
+            {name: "Timestamp", value: date.format("ddd MMM Do YYYY HH:mm"), inline: true});
+    const channel = await message.guild.channels.cache.get(client.config.channels.punishments);
+    channel.send(punishment);
 }
 
 async function deleteUsersReactions(msg, user) {

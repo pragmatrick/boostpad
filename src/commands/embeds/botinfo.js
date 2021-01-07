@@ -13,7 +13,7 @@ module.exports = {
         const bb_cf = client.config.emojis.coinflip_big;    // bigboost-coinflip
         const sm_cf = client.config.emojis.coinflip_small;  // smallboost-coinflip
         const embed = new Discord.MessageEmbed()
-        .attachFiles(["./Pictures/Logos/BotInfoFire.png"])
+        .attachFiles("../Pictures/Logos/BotInfoFire.png")
         .setTitle("Let me introduce myself...")
         .setColor(client.config.colors.blue)
         .addFields(
