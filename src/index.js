@@ -6,7 +6,7 @@ const client    = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTIO
 const { registerCommands, registerEvents } = require('./utils/registry');
 
 (async () => {
-    client.login("NzM2MTU0Nzc2NTA0NjMxMzA4.Xxqrjw.mdVpNXb9y7wBX4DqeYzWQ_RFd_E");//process.env.token);
+    client.login(process.env.token);
     client.commands               = new Map();
     client.cachedMessageReactions = new Map();
     client.config                 = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config.json"), "utf-8"));
