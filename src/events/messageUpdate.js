@@ -1,3 +1,6 @@
+const moment = require("moment");
+const Discord = require("discord.js");
+
 module.exports = async (client, oldMsg, msg) => {
     if (msg.author.bot || !msg.guild) return;
     if (msg.partial) await msg.fetch();
@@ -10,22 +13,27 @@ module.exports = async (client, oldMsg, msg) => {
         return;
     }
     
-    // checking commands
-    if(msg.content.startsWith(client.config.prefix) && msg.content.length > client.config.prefix.length) {
-        let args = msg.content.slice(client.config.prefix.length).split(/ +/);
+    // checking for commands
+    const prefix = client.config.prefix;
+    if(msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
+        let args = msg.content.slice(prefix.length).split(/ +/);
         let cmd = args.shift().toLowerCase();
         if (client.commands.get(cmd)) {
+            let verb;
             if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
                 msg.react("👎");
-                return;
+                verb = "denied from";
+            } else {
+                client.commands.get(cmd)(client, msg, args);
+                verb = "used by";
             }
-            client.commands.get(cmd)(client, msg, args, client.config);
+            // Sending cmd use to log
             const date = moment(msg.createdAt);
             const cmd_info = new Discord.MessageEmbed()
             .setColor(client.config.colors.blue)
             .setThumbnail(msg.member.user.displayAvatarURL())
-            .setDescription(`§ CMD used by ${msg.member}`)
-            .setFooter(`📝written on ${date.format("ddd MMM MM YYYY k:mm")}`)
+            .setDescription(`👾 CMD ${verb} ${msg.member}`)
+            .setFooter(`📝written on ${date.format("ddd D MMM YYYY k:mm")}`)
             .addFields(
                 {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
                 {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
