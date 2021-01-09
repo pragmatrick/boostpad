@@ -13,21 +13,17 @@ module.exports = async (client, msg) => {
     }
     
     if (msg.channel.id === client.config.channels.umfragen) {
-        if (!msg.cleanContent.endsWith("?")) {
-            msg.delete();
-        } else {
-            try {
-                await msg.react("👍🏼");
-                await msg.react("👎🏼");
-                await msg.react("🇽");
-                await msg.react("🇦");
-                await msg.react("🇧");
-                await msg.react("🇩");
-                await msg.react("🇪");
-                await msg.react("🇵");
-                await msg.react("🇹");
-            } catch (err) {}
-        }
+        try {
+            await msg.react("👍🏼");
+            await msg.react("👎🏼");
+            await msg.react("🇽");
+            await msg.react("🇦");
+            await msg.react("🇧");
+            await msg.react("🇩");
+            await msg.react("🇪");
+            await msg.react("🇵");
+            await msg.react("🇹");
+        } catch (err) {}
         return;
     }
 
