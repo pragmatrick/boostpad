@@ -30,8 +30,7 @@ module.exports = async (client, messageReaction, user) => {
             user.id, {type: "text", parent: client.config.channels.support,
                 permissionOverwrites: [
                     {id: user.id, allow: ["VIEW_CHANNEL"]},
-                    {id: client.config.roles.everyone, deny: ["VIEW_CHANNEL", "ADD_REACTIONS"]},
-                    {id: client.config.roles.verified, deny: ["CREATE_INSTANT_INVITE"]},
+                    {id: client.config.roles.everyone, deny: ["VIEW_CHANNEL", "ADD_REACTIONS", "CREATE_INSTANT_INVITE"]},
                     {id: client.config.roles.supporter, allow: ["VIEW_CHANNEL"]},
                 ]}
         )
