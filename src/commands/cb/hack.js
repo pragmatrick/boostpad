@@ -2,6 +2,13 @@ module.exports = {
     aliases: [],
     description: "Pretends to steal a user's boost.",
     async execute(client, msg, args) {
+        if (Object.values(client.config.admins).includes((await msg.mentions.members.first()).id)) {
+            await msg.react("🇸");
+            await msg.react("🇮");
+            await msg.react("🇰");
+            await msg.react("🇪");
+            return;
+        }
         if (msg.member.hasPermission("ADMINISTRATOR") || msg.member.roles.cache.has(client.config.roles.cb)) {
             let tag = msg.mentions.members.first();
             if (!tag) {
@@ -18,13 +25,6 @@ module.exports = {
             }
             if (tag.id === msg.author.id) {
                 return msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
-            }
-            if (Object.values(client.config.admins).includes(tag.id)) {
-                await msg.react("🇸");
-                await msg.react("🇮");
-                await msg.react("🇰");
-                await msg.react("🇪");
-                return;
             }
             const a = await msg.channel.send(`Hacking ${tag}!`);
             wait(1000);
