@@ -3,10 +3,12 @@ module.exports = {
     description: "Pretends to steal a user's boost.",
     async execute(client, msg, args) {
         if (Object.values(client.config.admins).includes((await msg.mentions.members.first()).id)) {
-            await msg.react("🇸");
-            await msg.react("🇮");
-            await msg.react("🇰");
-            await msg.react("🇪");
+            try {
+                await msg.react(client.emojis["s"]);
+                await msg.react(client.emojis["i"]);
+                await msg.react(client.emojis["k"]);
+                await msg.react(client.emojis["e"]);
+            } catch(e) {}
             return;
         }
         if (msg.member.hasPermission("ADMINISTRATOR") || msg.member.roles.cache.has(client.config.roles.cb)) {

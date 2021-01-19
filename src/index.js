@@ -7,9 +7,10 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 
 (async () => {
     client.login(process.env.token);
-    client.commands               = new Map();
-    client.cachedMessageReactions = new Map();
-    client.config                 = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config.json"), "utf-8"));
+    client.commands = new Map();
+    client.config   = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config.json"), "utf-8"));
+    client.emojis   = require("./regionalIndicators").emojis;
+
     await registerEvents(client, '../events');
     await registerCommands(client, '../commands');
 })();

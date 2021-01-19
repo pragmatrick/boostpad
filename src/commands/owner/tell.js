@@ -1,5 +1,3 @@
-const { emojis } = require("../../regionalIndicators");
-
 module.exports = {
     aliases: [],
     description: "Makes the bot react to a message with regional indicators.",
@@ -26,8 +24,8 @@ module.exports = {
             const word = args[0].toLowerCase();
             for (let i = 0; i < word.length && i < 10; i++) {
                 const letter = word[i];
-                if (letter in emojis) {
-                    await message.react(emojis[letter]);
+                if (letter in client.emojis) {
+                    await message.react(client.emojis[letter]);
                 }
             }
             await msg.delete();
