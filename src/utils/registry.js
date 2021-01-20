@@ -28,7 +28,7 @@ async function registerCommands(client, dir) {
                             if(aliases.length !== 0)
                                 aliases.forEach(alias => client.commands.set(alias, cmdModule.execute));
                             commandStatus.push(
-                                [`${cmdName}`, `✅ Success`, `${cmdModule.description}`]
+                                [`${cmdName}`, `Success`, `${cmdModule.description}`]
                             )
                         }
                     }
@@ -36,7 +36,7 @@ async function registerCommands(client, dir) {
                 catch(err) {
                     console.log(err);
                     commandStatus.push(
-                        [`${cmdName}`, `❌ Failed`, '⬅']
+                        [`${cmdName}`, `❌ FAILED`, '⬅']
                     );
                 }
             }
@@ -59,13 +59,13 @@ async function registerEvents(client, dir) {
                     let eventModule = require(path.join(__dirname, dir, file));
                     client.on(eventName, eventModule.bind(null, client));
                     eventStatus.push(
-                        [`${eventName}`, `✅ Success`, `${eventModule.description}`]
+                        [`${eventName}`, `Success`, `${eventModule.description}`]
                     )
                 }
                 catch(err) {
                     console.log(err);
                     eventStatus.push(
-                        [`${eventName}`, `❌ Failed`, ``]
+                        [`${eventName}`, `❌ FAILED`, ``]
                     );
                 }
             }
