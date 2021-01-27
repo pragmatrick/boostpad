@@ -1,16 +1,16 @@
 const Discord = require("discord.js");
-
-module.exports = (client, oldMember, newMember) => {/*
-    console.log("trg MemberUpdate");
+const moment = require("moment");
+module.exports = (client, oldMember, newMember) => {
     if (oldMember.nickname === newMember.nickname) return;
     
+    const date = moment();
     const embed = new Discord.MessageEmbed()
-        .setColor(client.config.colors.gold)
+        .setColor(client.config.colors.aqua)
         .setThumbnail(newMember.user.displayAvatarURL())
-        .setDescription(`§ Nickname change by ${newMember}`)
+        .setDescription(`§ Nickname change for ${newMember}`)
         .setFooter(`changed on ${date.format("ddd MMM MM YYYY k:mm")}`)
         .addFields(
             {name: "from", value: oldMember.nickname, inline: true},
             {name: "to", value: newMember.nickname, inline: true});
-    msg.guild.channels.cache.get(client.config.channels.log).send(embed);*/
+    newMember.guild.channels.cache.get(client.config.channels.log).send(embed);
 }

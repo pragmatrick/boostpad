@@ -12,7 +12,7 @@ module.exports = {
         const file = await fetchedURL.json();
         if (file.results.length > 0) {
             const randomIndex = Math.floor(Math.random() * file.results.length)
-            await msg.channel.send(file.results[randomIndex].url + `\nTenor Gif Search: ${keywords}`);
+            await msg.channel.send(file.results[randomIndex].url);
         }
         await msg.delete();
     }

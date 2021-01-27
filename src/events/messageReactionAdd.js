@@ -109,13 +109,12 @@ __Abusing the support system will cause a permanent ban__.`, inline: false});
         return;
     }
     if (messageReaction.emoji.id === client.config.emojis.report) {
-        if (msg.member.deleted) {  // if member who was reported already left the server
+        if (msg.member.deleted) {
             console.log(msg.member==null);
             deleteUsersReactions(msg, user);
             return;
         }                  
-        if (msg.member.hasPermission("ADMINISTRATOR")) { // you cant report an admin
-            console.log("admin!");
+        if (msg.member.hasPermission("ADMINISTRATOR")) {
             const r = msg.reactions.cache.find(r => r.emoji.name == client.config.report_emoji);
             r.remove();
             return;
@@ -127,7 +126,7 @@ __Abusing the support system will cause a permanent ban__.`, inline: false});
             .spliceFields(1, 1, {name: "Amount", value: messageReaction.count, inline: true});
             message.edit(embed);
         } 
-        else {    // if not create a new report
+        else {    // if not, create a new report
             const date = moment(msg.createdAt);
             const content = msg.cleanContent == "" ? "<...>" : msg.cleanContent;
             const embed = new Discord.MessageEmbed()
