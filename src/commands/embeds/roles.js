@@ -54,14 +54,16 @@ module.exports = {
             {name: "__Exclusive Roles__", value: "_make you part of the server elite._"},
             {name: `\u200B`, value: 
 `<@&${client.config.roles.cb}>
-<@&${client.config.roles.vip}>
+<@&${client.config.roles.prime}>
 <@&${client.config.roles.wildcard}>
+<@&${client.config.roles.vip}>
 <@&${client.config.roles.communist}>\n
 **and many more...**`, inline: true},
             {name: `\u200B`, value: 
 `| :fire:
-| :shushing_face:
+| :100:
 | :black_joker:
+| :shushing_face:
 | <:${msg.guild.emojis.cache.get(client.config.emojis.communism).identifier}>`, inline: true});
         await msg.channel.send(embed);
         msg.delete();

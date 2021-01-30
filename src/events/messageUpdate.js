@@ -2,8 +2,8 @@ const moment = require("moment");
 const Discord = require("discord.js");
 
 module.exports = async (client, oldMsg, msg) => {
-    if (msg.author.bot || !msg.guild) return;
     if (msg.partial) await msg.fetch();
+    if (msg.author.bot || !msg.guild) return;
     
     // checking only links channel
     const regex = /https?:\/{2}(?:[\/-\w.]|(?:%[\da-fA-F]{2}))+/;

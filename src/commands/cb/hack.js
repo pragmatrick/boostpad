@@ -4,10 +4,10 @@ module.exports = {
     async execute(client, msg, args) {
         if (Object.values(client.config.admins).includes((await msg.mentions.members.first()).id)) {
             try {
-                await msg.react(client.emojis["s"]);
-                await msg.react(client.emojis["i"]);
-                await msg.react(client.emojis["k"]);
-                await msg.react(client.emojis["e"]);
+                await msg.react(client.letterEmojis["s"]);
+                await msg.react(client.letterEmojis["i"]);
+                await msg.react(client.letterEmojis["k"]);
+                await msg.react(client.letterEmojis["e"]);
             } catch(e) {}
             return;
         }
