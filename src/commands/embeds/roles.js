@@ -28,19 +28,13 @@ module.exports = {
 <@&${client.config.roles.agent}>\n
 <@&${client.config.roles.supporter}>
 <@&${client.config.roles.super_mod}>
-& <@&${client.config.roles.mod}>\n
-<@&${client.config.roles.verified}>
-@everyone
-<@&${client.config.roles.lost}>\n\u200B`, inline: true},
+& <@&${client.config.roles.mod}>\n\u200B`, inline: true},
             {name: "\u200B", value: 
 `| reserved for <@${client.config.admins.grafpatron}>
 | reserved for <@${client.config.admins.boostpad}>
 | reserved for <@${client.config.admins.not_a_bot}>\n
 | community helper
-| kick/move/mute members\n\n
-| embed links, attach files
-| write & talk, invite people
-| the most simple server view\n\u200B`, inline: true},
+| kick/move/mute members\n\u200B`, inline: true},
             {name: "__Punishments__", value: 
 `_bring you disadvantages for disregarding our_ <#${client.config.channels.rules}>_ - c'est la vie._`},
             {name: `\u200B`, value: 
