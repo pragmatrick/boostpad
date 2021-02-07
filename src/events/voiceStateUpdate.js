@@ -21,7 +21,8 @@ module.exports = async (client, oldMember, newMember) => {
         joinedChannel.clone({
                 name: "Have you met "+name+"?", //client.config.create_channels.vc.name
                 permissionOverwrites: [
-                    {id: newMember.member.id, allow: ["MANAGE_CHANNELS", "MANAGE_ROLES"]}
+                    {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]},
+                    {id: client.config.roles.lost, deny: ["VIEW_CHANNEL"]}
                 ]
             }).then(channel => {
             newMember.setChannel(channel);
@@ -30,12 +31,12 @@ module.exports = async (client, oldMember, newMember) => {
             newMember.kick();
         });        
         // Sending cmd use to log
-        const date = moment();
-        const cmd_info = new Discord.MessageEmbed()
-        .setColor(client.config.colors.blue)
-        .setThumbnail(newMember.member.user.displayAvatarURL())
-        .setDescription(`§ VC created by ${newMember.member}`)
-        .setFooter(`🗣 done on ${date.format("ddd D MMM YYYY k:mm")}`);
-        newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info).catch(err => {});
+        const message = `🗣 ${newMember.member} used the infinite chamber on ${moment().format("ddd D MMM YYYY k:mm")}.`
+        newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(`🗣 Have you met ${newMember.member}?`);
+    }
+
+    // Among Us Channel Clearing
+    if (oldMember.channelID === client.config.channels.among_us) {
+        if (oldMember.channel.members.size == 0) oldMember.channel.setName("💬╵Among Us");
     }
 }
