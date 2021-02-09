@@ -39,12 +39,12 @@ They will often change, new ones will come, others will go...`},
 "`/hack <@user>` \n"+
 "`/coinflip` or `/boost` \n"+
 "`/nudge <@user>` \n" +
-"`/gif <keywords>`", inline: true},
+"`/tenor <keywords>`", inline: true},
             {name: `Output`, value:
 `steels a user's boost
 <:${msg.guild.emojis.cache.get(bb_cf).identifier}> or <:${msg.guild.emojis.cache.get(sm_cf).identifier}>
 deletes your message
-sends a gif` , inline: true},
+posts a gif` , inline: true},
             {name: `Role required`, value:
 `<@&${client.config.roles.cb}>
 @everyone
