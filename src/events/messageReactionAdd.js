@@ -41,7 +41,7 @@ To close the support-ticket, react with :lock:`)
     }
 
     // Report System
-    if(!(await msg.guild.members.fetch(msg.author.id).catch(() => null))) return;
+    if(!(await msg.guild.members.fetch(msg.author.id).catch(() => {}))) return;
 
     if (msg.channel.id === client.config.channels.report && user.id !== client.config.admins.boostpad) {
         const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
@@ -115,8 +115,8 @@ __Abusing the support system will cause a permanent ban__.`, inline: false});
             return;
         }                  
         if (msg.member.hasPermission("ADMINISTRATOR")) {
-            const r = msg.reactions.cache.find(r => r.emoji.name == client.config.report_emoji);
-            r.remove();
+            const reaction = await msg.reactions.cache.get(client.config.emojis.report);
+            reaction.remove();
             return;
         }
         // try to find out if message was already reported before
