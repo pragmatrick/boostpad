@@ -1,8 +1,17 @@
 const moment = require("moment");
 const Discord = require("discord.js");
 
+// discord(?:\.com|app\.com|\.gg)[\/invite\/]?(?:[a-zA-Z0-9\-]{2,32})
+
 module.exports = async (client, msg) => {
     if(msg.author.bot || !msg.guild) return;
+
+    // checking discord invite links
+    const regexDiscordLinks = /discord(?:\.com|app\.com|\.gg)[\/invite\/]?(?:[a-zA-Z0-9\-]{2,32})/;
+    if (regexDiscordLinks.test(msg.cleanContent) && !msg.member.hasPermissions("ADMINISTRATOR")) {
+        msg.delete();
+        return;
+    }
 
     // checking only links channel
     const regex = /https?:\/{2}(?:[\/-\w.]|(?:%[\da-fA-F]{2}))+/;
