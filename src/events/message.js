@@ -8,7 +8,7 @@ module.exports = async (client, msg) => {
 
     // checking discord invite links
     const regexDiscordLinks = /discord(?:\.com|app\.com|\.gg)[\/invite\/]?(?:[a-zA-Z0-9\-]{2,32})/;
-    if (regexDiscordLinks.test(msg.cleanContent) && !msg.member.hasPermissions("ADMINISTRATOR")) {
+    if (regexDiscordLinks.test(msg.cleanContent) && !msg.member.hasPermission("ADMINISTRATOR")) {
         msg.delete();
         return;
     }

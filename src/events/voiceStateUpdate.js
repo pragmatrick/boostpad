@@ -2,6 +2,15 @@ const moment = require("moment");
 const Discord = require("discord.js");
 
 module.exports = async (client, oldMember, newMember) => {
+    // Teleporter
+    if (newMember.channelID === client.config.channels.teleporter) {
+        newMember.setChannel(newMember.guild.channels.cache.get(client.config.channels.admin));
+    }
+    // Vent
+    if (newMember.channelID === client.config.channels.vent) {
+        newMember.setChannel(newMember.guild.channels.cache.get(client.config.channels.electrical));
+    }
+
     // Delete clear channels
     client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
         if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
