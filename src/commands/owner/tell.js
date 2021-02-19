@@ -4,13 +4,12 @@ module.exports = {
     description: "Makes the bot react to a message with regional indicators.",
     async execute(client, msg, args) {
         //await msg.channel.messages.fetch();
+        await msg.delete();
         if (args.length < 1) {
-            await msg.delete();
             return;
         }
         const messages = await msg.channel.messages.fetch({ limit: 2 });
-        if (messages.array().length < 2) {        
-            await msg.delete();
+        if (messages.array().length < 2) {
             return;
         }
         const lastMessage = messages.last();
@@ -21,6 +20,5 @@ module.exports = {
                 await lastMessage.react(client.letterEmojis[letter]);
             }
         }
-        await msg.delete();
     }
 }
