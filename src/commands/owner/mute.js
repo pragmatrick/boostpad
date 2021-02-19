@@ -1,14 +1,16 @@
 module.exports = {
     aliases: [],
-    description: "Mutes the Among Us Channel.",
+    description: "Mutes the current channel.",
     async execute(client, msg, args) {
         if (!msg.member.hasPermission("ADMINISTRATOR")) return;
         
-        const channel = msg.guild.channels.cache.get(client.config.channels.among_us);
+        const channel = msg.member.voice.channel;
+        msg.delete();
+        if (channel == null) return;
+        
         channel.members.array().forEach(async (member) => {
             await member.fetch();
             await member.voice.setMute(true);
         });
-        msg.delete();
     }
 }
