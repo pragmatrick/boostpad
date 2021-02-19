@@ -1,5 +1,6 @@
 module.exports = {
     aliases:  ["boost"],
+    permissions: [],
     description: "Sends a random emoji, either BigBoost-Coin, or a SmallBoost-Coin.",
     execute(client, msg, args) { 
         let random = Math.floor(Math.random() * 2);

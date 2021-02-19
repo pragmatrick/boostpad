@@ -2,12 +2,9 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Posts the rules-embed.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) {
-            msg.react("🤨");
-            return;
-        }
         const cb_icon = `<:${msg.guild.emojis.cache.get(client.config.emojis.cornerboost).identifier}>`
         const embed = new Discord.MessageEmbed()
         .attachFiles("../Pictures/Logos/RulesFire.png")

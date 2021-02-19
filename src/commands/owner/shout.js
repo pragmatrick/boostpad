@@ -1,13 +1,10 @@
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Makes the bot shout whatever the args are.",
     execute(client, msg, args) {
-        if (msg.member.hasPermission("ADMINISTRATOR")) {
-            const answer = args.join(" ");
-            msg.channel.send("**"+answer.toUpperCase()+"**");
-            msg.delete();
-        } else {
-            msg.react("🤨");
-        }
+        const answer = args.join(" ");
+        msg.channel.send("**"+answer.toUpperCase()+"**");
+        msg.delete();
     }
 }

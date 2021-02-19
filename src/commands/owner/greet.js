@@ -3,9 +3,9 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Greets a new user.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) return;
         const member = msg.mentions.members.first();
         await msg.delete();
         if (member == null) return;

@@ -1,9 +1,8 @@
 module.exports = {
     aliases: ["cc"],
+    permissions: ["ADMINISTRATOR"],
     description: "Bulk delete of messages.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) return;
-        
         try {
             if (args.length > 0) {
                 if (/^\d+$/.test(args[0])) {

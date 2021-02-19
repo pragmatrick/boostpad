@@ -39,28 +39,40 @@ module.exports = async (client, msg) => {
     // checking for commands
     const prefix = client.config.prefix;
     if(msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
+
         let args = msg.content.slice(prefix.length).split(/ +/);
         let cmd = args.shift().toLowerCase();
-        if (client.commands.get(cmd)) {
-            let verb;
-            if (msg.member.roles.cache.find(r => r.id === client.config.roles.enemy)) {
+        const command = client.commands.get(cmd);
+        if (!command) return;
+        if (hasRoleOrPermission(msg, command)) {
+            if (msg.member.roles.cache.get(client.config.roles.enemy)) {
                 msg.react("👎");
-                verb = "denied from";
             } else {
-                client.commands.get(cmd)(client, msg, args);
-                verb = "used by";
+                if (client.commands.get(cmd).execute(client, msg, args)) {
+                    // Sending cmd use to log
+                    const date = moment(msg.createdAt);
+                    const cmd_info = new Discord.MessageEmbed()
+                    .setColor(client.config.colors.blue)
+                    .setThumbnail(msg.member.user.displayAvatarURL())
+                    .setDescription(`👾 CMD used by ${msg.member}`)
+                    .setFooter(`📝written on ${date.format("ddd D MMM YYYY at k:mm")}`)
+                    .addFields(
+                        {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: true},
+                        {name: "Channel", value: `<#${msg.channel.id}>`, inline: true});
+                    msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
+                } else {
+                    msg.react("⁉")
+                }
             }
-            // Sending cmd use to log
-            const date = moment(msg.createdAt);
-            const cmd_info = new Discord.MessageEmbed()
-            .setColor(client.config.colors.blue)
-            .setThumbnail(msg.member.user.displayAvatarURL())
-            .setDescription(`👾 CMD ${verb} ${msg.member}`)
-            .setFooter(`📝written on ${date.format("ddd D MMM YYYY k:mm")}`)
-            .addFields(
-                {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: false},
-                {name: "Channel", value: `<#${msg.channel.id}>`, inline: false});
-            msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
+        } else {
+            msg.react("🚫");
         }
     }
 };
+
+function hasRoleOrPermission(msg, command) {
+    for (let i = 0; i < command.permissions.length; i++) {
+        if (msg.member.hasPermission(command.permissions[i])) return true;
+    }
+    return (command.permissions.length == 0);
+}

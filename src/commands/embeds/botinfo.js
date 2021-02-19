@@ -2,12 +2,9 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Posts the botinfo-embed.",
     execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) {
-            msg.react("🤨");
-            return;
-        }
         const sb_icon = `<:${msg.guild.emojis.cache.get(client.config.emojis.boostpad).identifier}>`;
         const report = `<:${msg.guild.emojis.cache.get(client.config.emojis.report).identifier}>`;
         const bb_cf = client.config.emojis.coinflip_big;    // bigboost-coinflip

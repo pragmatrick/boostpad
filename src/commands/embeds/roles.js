@@ -2,13 +2,9 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Posts the roles-embed.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) {
-            msg.react("🤨");
-            return;
-        }
-
         let justForFun = "";
         const server = client.guilds.cache.get(client.config.server_id);
         server.roles.cache.array().forEach(role => {

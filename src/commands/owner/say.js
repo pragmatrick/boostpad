@@ -1,13 +1,10 @@
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Makes the bot say whatever the args are.",
     execute(client, msg, args) {
-        if (msg.member.hasPermission("ADMINISTRATOR")) {
-            const answer = args.join(" ");
-            msg.channel.send(answer);
-            msg.delete();
-        } else {
-            msg.react("🤨");
-        }
+        const answer = args.join(" ");
+        msg.channel.send(answer);
+        msg.delete();
     }
 }

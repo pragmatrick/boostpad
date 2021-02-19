@@ -39,9 +39,9 @@ module.exports = async (client, oldMember, newMember) => {
             console.log(err);
             newMember.kick();
         });        
-        // Sending cmd use to log
-        const message = `🗣 ${newMember.member} used the infinite chamber on ${moment().format("ddd D MMM YYYY k:mm")}.`
-        newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(`🗣 Have you met ${newMember.member}?`);
+        // Sending infinite chamber use to log
+        const message = `🗣 | ${newMember.member} used the infinite chamber (${moment().format("ddd D MMM YYYY k:mm")}).`
+        newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(message);
     }
 
     // Among Us Channel Clearing

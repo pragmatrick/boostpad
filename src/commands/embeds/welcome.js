@@ -4,10 +4,6 @@ module.exports = {
     aliases: [],
     description: "Posts the welcome-embed.",
     async execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) {
-            msg.react("🤨");
-            return;
-        }
         const insta = `<:${msg.guild.emojis.cache.get(client.config.emojis.instagram).identifier}>`;
         const cb = `<:${msg.guild.emojis.cache.get(client.config.emojis.cornerboost).identifier}>`
         const embed = new Discord.MessageEmbed()

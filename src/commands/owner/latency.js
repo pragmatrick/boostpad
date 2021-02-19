@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "DEACTIVATED: Returns an embed with the bots ping.",
-    async execute(client, msg, args){
-        if (!msg.member.hasPermission("ADMINISTRATOR")) return;
+    async execute(client, msg, args) {
         /*const msg1 = await msg.channel.send("calibrating...");
         const msg2 = await msg.channel.send("calculating...");
         const ping = msg2.createdTimestamp - msg1.createdTimestamp;

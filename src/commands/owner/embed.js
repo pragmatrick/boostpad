@@ -2,10 +2,9 @@ const Discord = require("discord.js");
 
 module.exports = {
     aliases: [],
+    permissions: ["ADMINISTRATOR"],
     description: "Creates a certain hardcoded embed.",
     execute(client, msg, args) {
-        if (!msg.member.hasPermission("ADMINISTRATOR")) return;
-
         const embed = new Discord.MessageEmbed()
         .attachFiles("../Pictures/Logos/Cornerboost.png")
         .setTitle("__Welcome to the official Cornerboost-Server!__")

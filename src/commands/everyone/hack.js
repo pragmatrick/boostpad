@@ -1,5 +1,6 @@
 module.exports = {
     aliases: [],
+    permissions: [],
     description: "Pretends to steal a user's boost.",
     async execute(client, msg, args) {
         if (Object.values(client.config.admins).includes((await msg.mentions.members.first()).id)) {
