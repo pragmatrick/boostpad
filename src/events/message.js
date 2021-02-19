@@ -46,7 +46,7 @@ module.exports = async (client, msg) => {
         if (!command) return;
         if (hasRoleOrPermission(msg, command)) {
             if (msg.member.roles.cache.get(client.config.roles.enemy)) {
-                msg.react("👎");
+                await msg.react("👎");
             } else {
                 if (client.commands.get(cmd).execute(client, msg, args)) {
                     // Sending cmd use to log
@@ -61,11 +61,11 @@ module.exports = async (client, msg) => {
                         {name: "Channel", value: `<#${msg.channel.id}>`, inline: true});
                     msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
                 } else {
-                    msg.react("⁉")
+                    await msg.react("⁉");
                 }
             }
         } else {
-            msg.react("🚫");
+            await msg.react("🤨");
         }
     }
 };
