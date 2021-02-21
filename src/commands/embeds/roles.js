@@ -56,6 +56,6 @@ module.exports = {
 | :shushing_face:
 | <:${msg.guild.emojis.cache.get(client.config.emojis.communism).identifier}>`, inline: true});
         await msg.channel.send(embed);
-        msg.delete();
+        await msg.delete();
     }
 }

@@ -46,6 +46,6 @@ Otherwise we ask you to dm <@${client.config.admins.grafpatron}>.`});
 • consider that you can only have one ticket
 • ask your question there and wait for help`
         );
-        (await msg.channel.send(ticket)).react("📩");
+        await (await msg.channel.send(ticket)).react("📩");
     }
 }

@@ -4,7 +4,7 @@ module.exports = {
     aliases: [],
     permissions: ["ADMINISTRATOR"],
     description: "Posts the botinfo-embed.",
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         const sb_icon = `<:${msg.guild.emojis.cache.get(client.config.emojis.boostpad).identifier}>`;
         const report = `<:${msg.guild.emojis.cache.get(client.config.emojis.report).identifier}>`;
         const bb_cf = client.config.emojis.coinflip_big;    // bigboost-coinflip
@@ -43,7 +43,7 @@ They will often change, new ones will come, others will go...`},
 deletes your message
 posts a gif` , inline: true}
     );
-        msg.channel.send(embed);
-        msg.delete();
+        await msg.channel.send(embed);
+        await msg.delete();
     }
 }

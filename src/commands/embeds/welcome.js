@@ -26,7 +26,7 @@ There is also an option to ask directly for help from the support team.\n\u200B`
 `[@cornerboost](https://www.instagram.com/cornerboost/)`},
             {name: `:love_letter: Invite others to this server!`, value: 
 `https://discord.gg/AuGkuSz`});
-        msg.channel.send(embed);
-        msg.delete();
+        await msg.channel.send(embed);
+        await msg.delete();
     }
 }

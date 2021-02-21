@@ -22,7 +22,7 @@ We recommend you to adapt our server's style, being: `+ "``"+"<firstname> | <tag
             {name: `${cb_icon} 4 — Don't abuse our Bot`, value: 
 `<@${client.config.admins.boostpad}> doesn't like to be abused, treat him like yourself :pleading_face:
 _or else he will be no longer be your friend._`});
-        (await msg.channel.send(embed));
-        msg.delete();
+        await msg.channel.send(embed);
+        await msg.delete();
     }
 }
