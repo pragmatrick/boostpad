@@ -41,12 +41,7 @@ They will often change, new ones will come, others will go...`},
 `steels a user's boost
 <:${msg.guild.emojis.cache.get(bb_cf).identifier}> or <:${msg.guild.emojis.cache.get(sm_cf).identifier}>
 deletes your message
-posts a gif` , inline: true},
-            {name: `Role required`, value:
-`<@&${client.config.roles.cb}>
-@everyone
-@everyone
-@everyone`, inline: true},
+posts a gif` , inline: true}
     );
         msg.channel.send(embed);
         msg.delete();

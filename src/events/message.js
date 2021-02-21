@@ -59,7 +59,10 @@ module.exports = async (client, msg) => {
                     .addFields(
                         {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: true},
                         {name: "Channel", value: `<#${msg.channel.id}>`, inline: true});
-                    msg.guild.channels.cache.get(client.config.channels.bot_usage).send(cmd_info);
+                    const channelID = (msg.member.id === client.config.admins.grafpatron) 
+                                    ? client.config.channels.admin_usage 
+                                    : client.config.channels.bot_usage;
+                    msg.guild.channels.cache.get(channelID).send(cmd_info);
                 } else {
                     await msg.react("⁉");
                 }
