@@ -8,22 +8,29 @@ module.exports = {
         if (args.length === 0) return;
         if (originChannel == null) return;
         
-        const searchTerm = args.join(" ").toLowerCase();
-        const moveChannel = await msg.guild.channels.cache.find(channel => 
+        let searchTerm = args.join(" ").toLowerCase();
+        let moveChannel = await msg.guild.channels.cache.find(channel => 
             (channel.name.toLowerCase().includes(searchTerm) && channel.type == "voice")
         );
 
-        if (moveChannel) {
-            if (moveChannel == originChannel 
-                || !msg.member.permissionsIn(moveChannel).has("CONNECT") 
-                || !msg.member.permissionsIn(moveChannel).has("VIEW_CHANNEL")
-                || !msg.member.permissionsIn(moveChannel).has("MOVE_MEMBERS")
-                || !msg.member.permissionsIn(originChannel).has("CONNECT") 
-                || !msg.member.permissionsIn(originChannel).has("VIEW_CHANNEL")
-                || !msg.member.permissionsIn(originChannel).has("MOVE_MEMBERS")) return;
-            originChannel.members.array().forEach(member => {
-                member.voice.setChannel(moveChannel).catch(null);
-            });
+        if (!moveChannel) {
+            searchTerm = searchTerm.split("").filter(char => /[a-zA-Z]/.test(char)).join("");
+            moveChannel = await msg.guild.channels.cache.find(channel => 
+                (channel.name.split("").filter(char => /[a-zA-Z]/.test(char)).join("").toLowerCase().includes(searchTerm)
+                && channel.type == "voice")
+            );
+            if (!moveChannel) return;
         }
+
+        if (moveChannel == originChannel 
+            || !msg.member.permissionsIn(moveChannel).has("CONNECT") 
+            || !msg.member.permissionsIn(moveChannel).has("VIEW_CHANNEL")
+            || !msg.member.permissionsIn(moveChannel).has("MOVE_MEMBERS")
+            || !msg.member.permissionsIn(originChannel).has("CONNECT") 
+            || !msg.member.permissionsIn(originChannel).has("VIEW_CHANNEL")
+            || !msg.member.permissionsIn(originChannel).has("MOVE_MEMBERS")) return;
+        originChannel.members.array().forEach(member => {
+            member.voice.setChannel(moveChannel).catch(null);
+        });
     }
 }
