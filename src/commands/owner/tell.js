@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["tell"],
     permissions: ["ADMINISTRATOR"],
     description: "Makes the bot react to a message with regional indicators.",
     async execute(client, msg, args) {

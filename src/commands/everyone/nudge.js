@@ -1,5 +1,5 @@
 module.exports = {
-    aliases:  ["stupse"],
+    names:       ["nudge", "stupse"],
     permissions: [],
     description: "Nudges a user.",
     execute(client, msg, args) { 

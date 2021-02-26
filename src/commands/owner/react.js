@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["react"],
     permissions: ["ADMINISTRATOR"],
     description: "Makes the bot react to a message with certain emojis.",
     async execute (client, msg, args) {

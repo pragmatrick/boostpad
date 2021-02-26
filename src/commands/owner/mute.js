@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["mute"],
     permissions: ["ADMINISTRATOR"],
     description: "Mutes the current channel.",
     async execute(client, msg, args) {

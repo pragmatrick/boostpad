@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["vent"],
     permissions: ["MOVE_MEMBERS", "ADMINISTRATOR"],
     description: "Moves the the people from channel a channel which have the permissions to the another channel.",
     async execute(client, msg, args) {

@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    aliases: [],
+    names:       ["welcome"],
+    permissions: ["ADMINISTRATOR"],
     description: "Posts the welcome-embed.",
     async execute(client, msg, args) {
         const insta = `<:${msg.guild.emojis.cache.get(client.config.emojis.instagram).identifier}>`;

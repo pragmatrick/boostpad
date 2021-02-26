@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    aliases: [],
+    names:       ["botinfo"],
     permissions: ["ADMINISTRATOR"],
     description: "Posts the botinfo-embed.",
     async execute(client, msg, args) {

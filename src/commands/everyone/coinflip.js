@@ -1,5 +1,5 @@
 module.exports = {
-    aliases:  ["boost"],
+    names:       ["coinflip", "boost"],
     permissions: [],
     description: "Sends a random emoji, either BigBoost-Coin, or a SmallBoost-Coin.",
     execute(client, msg, args) { 

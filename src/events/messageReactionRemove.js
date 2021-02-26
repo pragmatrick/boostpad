@@ -1,21 +1,25 @@
 const Discord = require("discord.js");
 
-module.exports = async (client, messageReaction, user) => {
-    // fetching message from outside cache
-    if (messageReaction.partial) await messageReaction.fetch();
-    messageReaction.message.channel.messages.fetch();
-    const msg = messageReaction.message;
-   
-    if (!msg.guild || user.bot) return;
+module.exports = {
+    name:        "messageReactionRemove",
+    description: "Emitted whenever a reaction is removed from a cached message.",
+    async run(client, messageReaction, user) {
+        // fetching message from outside cache
+        if (messageReaction.partial) await messageReaction.fetch();
+        messageReaction.message.channel.messages.fetch();
+        const msg = messageReaction.message;
+    
+        if (!msg.guild || user.bot) return;
 
-    //Report System
-    if (messageReaction.emoji.id === client.config.emojis.report && !msg.member.hasPermission("ADMINISTRATOR")) {
-        const message = (await msg.guild.channels.cache.get(client.config.channels.report).messages.fetch())
-        .find(message => message.embeds[0].fields[3].value === msg.id);
-        const embed = new Discord.MessageEmbed(message.embeds[0])
-        .spliceFields(1, 1, {name: "Amount", value: messageReaction.count, inline: true});
-        message.edit(embed);
-    };
+        //Report System
+        if (messageReaction.emoji.id === client.config.emojis.report && !msg.member.hasPermission("ADMINISTRATOR")) {
+            const message = (await msg.guild.channels.cache.get(client.config.channels.report).messages.fetch())
+            .find(message => message.embeds[0].fields[3].value === msg.id);
+            const embed = new Discord.MessageEmbed(message.embeds[0])
+            .spliceFields(1, 1, {name: "Amount", value: messageReaction.count, inline: true});
+            message.edit(embed);
+        };
+    }
 }
 
 async function deleteUsersReactions(msg, user) {

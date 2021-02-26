@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["shout"],
     permissions: ["ADMINISTRATOR"],
     description: "Makes the bot shout whatever the args are.",
     async execute(client, msg, args) {

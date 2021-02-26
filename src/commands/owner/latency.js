@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    aliases: [],
+    names:       ["latency", "ping"],
     permissions: ["ADMINISTRATOR"],
-    description: "DEACTIVATED: Returns an embed with the bots ping.",
+    description: "Returns an embed with the bots ping.",
     async execute(client, msg, args) {
-        /*const msg1 = await msg.channel.send("calibrating...");
+        const msg1 = await msg.channel.send("calibrating...");
         const msg2 = await msg.channel.send("calculating...");
         const ping = msg2.createdTimestamp - msg1.createdTimestamp;
         
@@ -37,6 +37,5 @@ module.exports = {
         msg1.delete();
         msg2.delete();
         msg.channel.send(embed);
-        */
     }
 }

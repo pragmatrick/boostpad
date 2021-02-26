@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    aliases: [],
+    names: ["greeting"],
     permissions: ["ADMINISTRATOR"],
     description: "Creates a certain hardcoded embed.",
     async execute(client, msg, args) {

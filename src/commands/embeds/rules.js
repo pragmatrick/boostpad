@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    aliases: [],
+    names:       ["rules"],
     permissions: ["ADMINISTRATOR"],
     description: "Posts the rules-embed.",
     async execute(client, msg, args) {

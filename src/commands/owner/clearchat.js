@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: ["cc"],
+    names:       ["clearchat", "cc"],
     permissions: ["ADMINISTRATOR"],
     description: "Bulk delete of messages.",
     async execute(client, msg, args) {

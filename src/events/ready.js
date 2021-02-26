@@ -3,7 +3,10 @@ const tableConfig                    = require("../utils/tableConfig");
 const { commandStatus, eventStatus } = require("../utils/registry");
 
 
-module.exports = async (client) => {
+module.exports = {
+    name:        "ready",
+    description: "Emitted when the client becomes ready to start working.",
+    async run(client) {
         console.log("----------------------------------------Boostpad was grabbed----------------------------------------");
 
         await client.guilds.cache.get(client.config.server_id).channels.cache.get(client.config.channels.help).messages.fetch();
@@ -14,18 +17,17 @@ module.exports = async (client) => {
         console.log("\n");
         await loadTable(eventStatus, 50);
         console.log("\n");
+    }
 }
 
 function loadTable(arr, interval) {
     let fn, i = 0, stream = createStream(tableConfig);
     return new Promise((resolve, reject) => {
         fn = setInterval(() => {
-            if(i === arr.length)
-            {
+            if(i === arr.length) {
                 clearInterval(fn);
                 resolve();
-            }
-            else {
+            } else {
                 stream.write(arr[i]);
                 i++;
             }

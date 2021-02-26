@@ -1,42 +1,39 @@
 const fs    = require('fs').promises;
 const path  = require('path');
-const { checkCommandModule, checkProperties } = require('./validate');
+const { checkCommandModule, checkCommandProperties, checkEventModule, checkEventProperties } = require('./validate');
 const commandStatus = [
-    [`*Command*`, `*Status*`, `*Description*`]
+    [`→ Command`, `Aliases`, `Description`]
 ];
 const eventStatus = [
-    [`*Event*`, `*Status*`, ``]
+    [`→ Event`, `←`, `Description`]
 ];
 
 async function registerCommands(client, dir) {
-    let files = await fs.readdir(path.join(__dirname, dir));
-    // Loop through each file.
-    for(let file of files) {
-        let stat = await fs.lstat(path.join(__dirname, dir, file));
-        if(stat.isDirectory()) // If file is a directory, recursive call recurDir
+    const files = await fs.readdir(path.join(__dirname, dir));
+    for (const file of files) {
+        const stat = await fs.lstat(path.join(__dirname, dir, file));
+        if (stat.isDirectory()) {
+            // If file is a directory, recursive call recurDir
             registerCommands(client, path.join(dir, file));
-        else {
+        } else {
             // Check if file is a .js file.
-            if(file.endsWith(".js")) {
-                let cmdName = file.substring(0, file.indexOf(".js"));
+            if (file.endsWith(".js")) {
                 try {
-                    let cmdModule = require(path.join(__dirname, dir, file));
-                    if(checkCommandModule(cmdName, cmdModule)) {
-                        if(checkProperties(cmdName, cmdModule)) {
-                            let { aliases } = cmdModule;
-                            client.commands.set(cmdName, cmdModule);
-                            if(aliases.length !== 0)
-                                aliases.forEach(alias => client.commands.set(alias, cmdModule));
+                    const cmdModule = require(path.join(__dirname, dir, file));
+                    if (checkCommandModule(file, cmdModule)) {
+                        if (checkCommandProperties(file, cmdModule)) {
+                            for (const name of cmdModule.names) {
+                                client.commands.set(name, cmdModule);
+                            }
                             commandStatus.push(
-                                [`${cmdName}`, `Success`, `${cmdModule.description}`]
+                                [`+ ${file}`, `${cmdModule.names.join(", ")}`, `${cmdModule.description}`]
                             )
                         }
                     }
-                }
-                catch(err) {
+                } catch(err) {
                     console.log(err);
                     commandStatus.push(
-                        [`${cmdName}`, `❌ FAILED`, '⬅']
+                        [`- ${file}`, `←`, '←']
                     );
                 }
             }
@@ -45,27 +42,29 @@ async function registerCommands(client, dir) {
 }
 
 async function registerEvents(client, dir) {
-    let files = await fs.readdir(path.join(__dirname, dir));
-    // Loop through each file.
-    for(let file of files) {
-        let stat = await fs.lstat(path.join(__dirname, dir, file));
-        if(stat.isDirectory()) // If file is a directory, recursive call recurDir
+    const files = await fs.readdir(path.join(__dirname, dir));
+    for (const file of files) {
+        const stat = await fs.lstat(path.join(__dirname, dir, file));
+        if (stat.isDirectory()){
+            // If file is a directory, recursive call recurDir
             registerEvents(client, path.join(dir, file));
-        else {
+        } else {
             // Check if file is a .js file.
-            if(file.endsWith(".js")) {
-                let eventName = file.substring(0, file.indexOf(".js"));
+            if (file.endsWith(".js")) {
                 try {
-                    let eventModule = require(path.join(__dirname, dir, file));
-                    client.on(eventName, eventModule.bind(null, client));
-                    eventStatus.push(
-                        [`${eventName}`, `Success`, `${eventModule.description}`]
-                    )
-                }
-                catch(err) {
+                    const eventModule = require(path.join(__dirname, dir, file));
+                    if (checkEventModule(file, eventModule)) {
+                        if (checkEventProperties(file, eventModule)) {
+                            client.on(eventModule.name, (...args) => eventModule.run(client, ...args));
+                            eventStatus.push(
+                                [`+ ${file}`, `←`, `${eventModule.description}`]
+                            )
+                        }
+                    }
+                } catch(err) {
                     console.log(err);
                     eventStatus.push(
-                        [`${eventName}`, `❌ FAILED`, ``]
+                        [`- ${file}`, `←`, `←`]
                     );
                 }
             }

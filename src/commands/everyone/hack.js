@@ -1,5 +1,5 @@
 module.exports = {
-    aliases: [],
+    names:       ["hack"],
     permissions: [],
     description: "Pretends to steal a user's boost.",
     async execute(client, msg, args) {
