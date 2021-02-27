@@ -39,34 +39,31 @@ module.exports = {
 
         // checking for commands
         const prefix = client.config.prefix;
-        if(msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
+        if (msg.content.startsWith(prefix) && msg.content.length > prefix.length) {
 
-            let args = msg.content.slice(prefix.length).split(/ +/);
-            let cmd = args.shift().toLowerCase();
-            const command = client.commands.get(cmd);
+            const args    = msg.content.slice(prefix.length).split(/ +/);
+            const cmd     = args.shift().toLowerCase();
             if (!client.commands.has(cmd)) return;
-            if (hasRoleOrPermission(msg, command)) {
+            const cmdModule = client.commands.get(cmd);
+            if (hasRoleOrPermission(msg, cmdModule)) {
                 if (msg.member.roles.cache.get(client.config.roles.enemy)) {
                     await msg.react("👎");
                 } else {
-                    if (client.commands.get(cmd).execute(client, msg, args)) {
-                        // Sending cmd use to log
-                        const date = moment(msg.createdAt);
-                        const cmd_info = new Discord.MessageEmbed()
-                        .setColor(client.config.colors.blue)
-                        .setThumbnail(msg.member.user.displayAvatarURL())
-                        .setDescription(`👾 CMD used by ${msg.member}`)
-                        .setFooter(`📝written on ${date.format("ddd D MMM YYYY at k:mm")}`)
-                        .addFields(
-                            {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: true},
-                            {name: "Channel", value: `<#${msg.channel.id}>`, inline: true});
-                        const channelID = (msg.member.id === client.config.admins.grafpatron) 
-                                        ? client.config.channels.admin_usage 
-                                        : client.config.channels.bot_usage;
-                        msg.guild.channels.cache.get(channelID).send(cmd_info);
-                    } else {
-                        await msg.react("⁉");
-                    }
+                    cmdModule.execute(client, msg, args);
+                    // Sending cmd-usage to "bot-usage / admin-usage"
+                    const date = moment(msg.createdAt);
+                    const cmd_info = new Discord.MessageEmbed()
+                    .setColor(client.config.colors.blue)
+                    .setThumbnail(msg.member.user.displayAvatarURL())
+                    .setDescription(`👾 CMD used by ${msg.member}`)
+                    .setFooter(`📝written on ${date.format("ddd D MMM YYYY at k:mm")}`)
+                    .addFields(
+                        {name: "Message", value: `[${msg.cleanContent}](${msg.url})`, inline: true},
+                        {name: "Channel", value: `<#${msg.channel.id}>`, inline: true});
+                    const channelID = (msg.member.hasPermission("ADMINISTRATOR"))
+                                    ? client.config.channels.admin_usage 
+                                    : client.config.channels.bot_usage;
+                    msg.guild.channels.cache.get(channelID).send(cmd_info);
                 }
             } else {
                 await msg.react("🤨");

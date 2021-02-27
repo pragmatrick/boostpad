@@ -42,8 +42,11 @@ module.exports = {
                 newMember.kick();
             });        
             // Sending infinite chamber use to log
+            const channelID = (newMember.member.hasPermission("ADMINISTRATOR"))
+                                    ? client.config.channels.admin_usage 
+                                    : client.config.channels.bot_usage;
             const message = `🗣 | ${newMember.member} used the infinite chamber (${moment().format("ddd D MMM YYYY k:mm")}).`
-            newMember.guild.channels.cache.get(client.config.channels.bot_usage).send(message);
+            newMember.guild.channels.cache.get(channelID).send(message);
         }
 
         // Among Us Channel Clearing
