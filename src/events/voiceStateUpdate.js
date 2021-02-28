@@ -27,13 +27,12 @@ module.exports = {
                 return;
             }
             const joinedChannel = newMember.channel;
-            const nickname = newMember.member.nickname;;
+            const nickname = newMember.member.nickname;
             const name = nickname.split(/ +/)[0];
             joinedChannel.clone({
                     name: "Have you met "+name+"?", //client.config.create_channels.vc.name
                     permissionOverwrites: [
-                        {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]},
-                        {id: client.config.roles.lost, deny: ["VIEW_CHANNEL"]}
+                        {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]}
                     ]
                 }).then(channel => {
                 newMember.setChannel(channel);
