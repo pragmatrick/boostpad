@@ -7,9 +7,9 @@ module.exports = {
         const djrole = msg.guild.roles.cache.get(client.config.roles.dj);
         if (!msg.member.roles.cache.has(djroleID)) {
             await msg.member.roles.add(djrole);
-            await msg.channel.reply("I gave you the DJ-role.");
+            await msg.reply("I gave you the DJ-role.");
         } else {
-            await msg.channel.send("You already have the DJ-role.");
+            await msg.reply("You already have the DJ-role.");
         }
     }
 }
