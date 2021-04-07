@@ -46,7 +46,7 @@ To close the support-ticket, react with :lock:`)
         // Report System
         if(!(await msg.guild.members.fetch(msg.author.id).catch(() => {}))) return;
 
-        if (msg.channel.id === client.config.channels.report && user.id !== client.config.admins.boostpad) {
+        if (msg.channel.id === client.config.channels.reports && user.id !== client.config.admins.boostpad) {
             const message = (await msg.guild.channels.cache.get((msg.embeds[0].fields[2].value).slice(2,-1)).messages.fetch(msg.embeds[0].fields[3].value));
             if (message == undefined) {
                 console.log("trg undefined");
@@ -123,7 +123,7 @@ __Abusing the support system will cause a permanent ban__.`, inline: false});
                 return;
             }
             // try to find out if message was already reported before
-            const message = (await msg.guild.channels.cache.get(client.config.channels.report).messages.fetch()).find(f_msg => f_msg.embeds[0].fields[3].value === msg.id);
+            const message = (await msg.guild.channels.cache.get(client.config.channels.reports).messages.fetch()).find(f_msg => f_msg.embeds[0].fields[3].value === msg.id);
             if (message) {
                 const embed = new Discord.MessageEmbed(message.embeds[0])
                 .spliceFields(1, 1, {name: "Amount", value: messageReaction.count, inline: true});
@@ -143,7 +143,7 @@ __Abusing the support system will cause a permanent ban__.`, inline: false});
                     {name: "Channel", value: `<#${msg.channel.id}>`, inline: true},
                     {name: "Message ID", value: msg.id, inline: false});
 
-                const reply = await msg.member.guild.channels.cache.get(client.config.channels.report).send(embed);
+                const reply = await msg.member.guild.channels.cache.get(client.config.channels.reports).send(embed);
                 try {
                     await reply.react("✅");
                     await reply.react("❌");
