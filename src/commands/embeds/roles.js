@@ -46,15 +46,13 @@ module.exports = {
 `<@&${client.config.roles.cb}>
 <@&${client.config.roles.prime}>
 <@&${client.config.roles.wildcard}>
-<@&${client.config.roles.vip}>
-<@&${client.config.roles.communist}>\n
+<@&${client.config.roles.vip}>\n
 **and many more...**`, inline: true},
             {name: `\u200B`, value: 
 `| :fire:
 | :100:
 | :black_joker:
-| :shushing_face:
-| <:${msg.guild.emojis.cache.get(client.config.emojis.communism).identifier}>`, inline: true});
+| :shushing_face:`, inline: true});
         await msg.channel.send(embed);
         await msg.delete();
     }
