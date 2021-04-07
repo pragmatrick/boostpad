@@ -9,7 +9,7 @@ module.exports = {
             await msg.member.roles.remove(djrole);
             await msg.reply("I removed the DJ-role from you.");
         } else {
-            await msg.reply("You already don't have the DJ-role.");
+            await msg.reply("you already don't have the DJ-role.");
         }
     }
 }

@@ -9,7 +9,7 @@ module.exports = {
             await msg.member.roles.add(djrole);
             await msg.reply("I gave you the DJ-role.");
         } else {
-            await msg.reply("You already have the DJ-role.");
+            await msg.reply("you already have the DJ-role.");
         }
     }
 }
