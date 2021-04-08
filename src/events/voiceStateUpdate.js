@@ -7,7 +7,7 @@ module.exports = {
     async run(client, oldMember, newMember) {
         // Logging
         if (oldMember.channel != newMember.channel) {
-            const trackChannel = msg.guild.channels.cache.get(client.config.channels.tracker);
+            const trackChannel = oldMember.guild.channels.cache.get(client.config.channels.tracker);
             if (oldMember.channel == null) {
                 trackChannel.send(`🟢 ${newMember.member} connected to `+"`"+`<#${newMember.channelID}>`+"`");
             } else if (newMember.channel == null) {
