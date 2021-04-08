@@ -3,13 +3,13 @@ module.exports = {
     permissions: [],
     description: "Pretends to steal a user's boost.",
     async execute(client, msg, args) {
-        let tag = msg.mentions.members.first();
+        let tag = await msg.mentions.members.first();
         if ( !((tag && args.length == 1) || args.length == 0) ) {
             await msg.delete();
             return;
         }
 
-        if (Object.values(client.config.admins).includes((await msg.mentions.members.first()).id)) {
+        if (Object.values(client.config.admins).includes(tag.id)) {
             try {
                 await msg.react(client.letterEmojis["s"]);
                 await msg.react(client.letterEmojis["i"]);
