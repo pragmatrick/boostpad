@@ -5,6 +5,8 @@ module.exports = {
     permissions: ["ADMINISTRATOR"],
     description: "Posts the roles-embed.",
     async execute(client, msg, args) {
+        // DISABLED
+        return;
         let justForFun = "";
         const server = client.guilds.cache.get(client.config.server_id);
         server.roles.cache.array().forEach(role => {
