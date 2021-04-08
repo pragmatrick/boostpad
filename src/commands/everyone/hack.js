@@ -9,15 +9,6 @@ module.exports = {
             return;
         }
 
-        if (Object.values(client.config.admins).includes(tag.id)) {
-            try {
-                await msg.react(client.letterEmojis["s"]);
-                await msg.react(client.letterEmojis["i"]);
-                await msg.react(client.letterEmojis["k"]);
-                await msg.react(client.letterEmojis["e"]);
-            } catch(e) {}
-                return;
-        }
         if (args.length == 0) {
             const chooseMsg = await msg.channel.send("Choosing random...");
             do {
@@ -27,6 +18,14 @@ module.exports = {
             wait(500);
         } else if (tag.id === msg.author.id) {
             await msg.channel.send(`${msg.member} I can't hack you, tell me someone else to hack`);
+            return;
+        } else if (Object.values(client.config.admins).includes(tag.id)) {
+            try {
+                await msg.react(client.letterEmojis["s"]);
+                await msg.react(client.letterEmojis["i"]);
+                await msg.react(client.letterEmojis["k"]);
+                await msg.react(client.letterEmojis["e"]);
+            } catch(e) {}
             return;
         }
         const a = await msg.channel.send(`Hacking ${tag}!`);
