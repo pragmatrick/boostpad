@@ -8,12 +8,13 @@ module.exports = {
         // Logging
         if (oldMember.channel != newMember.channel) {
             const trackChannel = oldMember.guild.channels.cache.get(client.config.channels.tracker);
+            const member = oldMember.member.hasPermission("ADMINISTRATOR") ? "**"+oldMember.member.displayName+"**" : oldMember.member;
             if (oldMember.channel == null) {
-                trackChannel.send(`🟢 ${newMember.member} connected to `+"`"+`<#${newMember.channelID}>`+"`");
+                trackChannel.send(`🟢 ${member} connected to `+"`"+`${newMember.channel.name}`+"`");
             } else if (newMember.channel == null) {
-                trackChannel.send(`🔴 ${oldMember.member} disconnected from `+"`"+`<#${oldMember.channelID}>`+"`");
+                trackChannel.send(`🔴 ${member} disconnected from `+"`"+`${oldMember.channel.name}`+"`");
             } else {
-                trackChannel.send(`🔀 ${newMember.member} switched from to `+"`"+`<#${oldMember.channelID}>`+"` to " +"`"+`<#${newMember.channelID}>`+"`");
+                trackChannel.send(`🔀 ${member} switched from to `+"`"+`${oldMember.channel.name}`+"` to " +"`"+`${newMember.channel.name}`+"`");
             }
         }
 
@@ -26,10 +27,6 @@ module.exports = {
 
         // Join to create VC
         if (newMember.channelID === client.config.create_channels.vc.id) {
-            if (newMember.member.roles.cache.get(client.config.roles.enemy)) {
-                newMember.kick();
-                return;
-            }
             const joinedChannel = newMember.channel;
             const nickname = newMember.member.nickname;
             const name = nickname.split(/ +/)[0];

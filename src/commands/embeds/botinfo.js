@@ -31,18 +31,7 @@ The so called **Infinite Chamber** is a place where everyone can create their ow
             {name: `${sb_icon} 4 — Commands`, value: 
 `Using commands in chat rooms can be quite funny. 
 To be executed, your message must contain the command **only**.
-They will often change, new ones will come, others will go...`},
-            {name: `Command Name`, value:
-"`/hack <@user>` \n"+
-"`/coinflip` or `/boost` \n"+
-"`/nudge <@user>` \n" +
-"`/tenor <keywords>`", inline: true},
-            {name: `Output`, value:
-`steels a user's boost
-<:${msg.guild.emojis.cache.get(bb_cf).identifier}> or <:${msg.guild.emojis.cache.get(sm_cf).identifier}>
-deletes your message
-posts a gif` , inline: true}
-    );
+Here is a demostration of the currently available commands:`});
         await msg.channel.send(embed);
         await msg.delete();
     }

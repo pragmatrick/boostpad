@@ -23,7 +23,6 @@ module.exports = {
 <@&${client.config.roles.admin}>
 <@&${client.config.roles.agent}>\n
 <@&${client.config.roles.supporter}>
-<@&${client.config.roles.super_mod}>
 & <@&${client.config.roles.mod}>\n\u200B`, inline: true},
             {name: "\u200B", value: 
 `| reserved for <@${client.config.admins.grafpatron}>
@@ -32,15 +31,14 @@ module.exports = {
 | community helper
 | kick/move/mute members\n\u200B`, inline: true},
             {name: "__Punishments__", value: 
-`_bring you disadvantages for disregarding our_ <#${client.config.channels.rules}>_ - c'est la vie._`},
+`_give you disadvantages for disregarding our_ <#${client.config.channels.rules}>_ - c'est la vie._`},
             {name: `\u200B`, value: 
 `<@&${client.config.roles.stfu}>
 <@&${client.config.roles.enemy}>
 <@&${client.config.roles.egoist}>\n\u200B`, inline: true},
             {name: `\u200B`, value: 
-`| shut the fuck up
-| enjoy getting ignored and disrespected
-| nobody will help you anymore :stuck_out_tongue_closed_eyes:\n\u200B`, inline: true},
+`| no more writing for you
+| no more bot-usage for you\n\u200B`, inline: true},
             {name: "__Exclusive Roles__", value: "_make you part of the server elite._"},
             {name: `\u200B`, value: 
 `<@&${client.config.roles.cb}>

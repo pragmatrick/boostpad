@@ -14,8 +14,8 @@ module.exports = {
             const messages = await msg.channel.messages.fetch({limit: 99});
             await msg.channel.bulkDelete(messages);
         } catch(err) {
-            msg.delete();
-            console.log(err)
+            await msg.delete();
+            console.log(err);
         }
     }
 }

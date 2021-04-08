@@ -46,7 +46,7 @@ module.exports = {
             if (!client.commands.has(cmd)) return;
             const cmdModule = client.commands.get(cmd);
             if (hasRoleOrPermission(msg, cmdModule)) {
-                if (msg.member.roles.cache.get(client.config.roles.enemy)) {
+                if (msg.member.roles.cache.get(client.config.roles.bot_abuser)) {
                     await msg.react("👎");
                 } else {
                     cmdModule.execute(client, msg, args);
@@ -65,8 +65,6 @@ module.exports = {
                                     : client.config.channels.bot_usage;
                     msg.guild.channels.cache.get(channelID).send(cmd_info);
                 }
-            } else {
-                await msg.react("🤨");
             }
         }
     }
