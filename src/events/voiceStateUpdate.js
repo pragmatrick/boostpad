@@ -11,7 +11,7 @@ module.exports = {
             if (oldMember.channel == null) {
                 trackChannel.send(`🟢 ${newMember.member} connected to `+"`"+`<#${newMember.channelID}>`+"`");
             } else if (newMember.channel == null) {
-                trackChannel.send(`🔴 ${newMember.member} disconnected from `+"`"+`<#${oldMember.channelID}>`+"`");
+                trackChannel.send(`🔴 ${oldMember.member} disconnected from `+"`"+`<#${oldMember.channelID}>`+"`");
             } else {
                 trackChannel.send(`🔀 ${newMember.member} switched from to `+"`"+`<#${oldMember.channelID}>`+"` to " +"`"+`<#${newMember.channelID}>`+"`");
             }
