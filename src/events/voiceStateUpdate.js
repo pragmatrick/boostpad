@@ -1,9 +1,22 @@
 const moment = require("moment");
+const Discord = require("discord.js");
 
 module.exports = {
     name:        "voiceStateUpdate",
     description: "Emitted whenever a member changes voice state - e.g. joins/leaves a channel, mutes/unmutes.",
     async run(client, oldMember, newMember) {
+        // Logging
+        if (oldMember.channel != newMember.channel) {
+            const trackChannel = msg.guild.channels.cache.get(client.config.channels.tracker);
+            if (oldMember.channel == null) {
+                trackChannel.send(`🟢 ${newMember.member} connected to `+"`"+`<#${newMember.channelID}>`+"`");
+            } else if (newMember.channel == null) {
+                trackChannel.send(`🔴 ${newMember.member} disconnected from `+"`"+`<#${oldMember.channelID}>`+"`");
+            } else {
+                trackChannel.send(`🔀 ${newMember.member} switched from to `+"`"+`<#${oldMember.channelID}>`+"` to " +"`"+`<#${newMember.channelID}>`+"`");
+            }
+        }
+
         // Delete clear channels
         client.guilds.cache.get(client.config.server_id).channels.cache.array().forEach(channel => {
             if ((channel.parent == client.config.create_channels.vc.parent && channel.id != client.config.create_channels.vc.id)) {
