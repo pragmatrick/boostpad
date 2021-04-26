@@ -33,7 +33,7 @@ async function registerCommands(client, dir) {
                 } catch(err) {
                     console.log(err);
                     commandStatus.push(
-                        [`- ${file}`, `←`, '←']
+                        [`ERR: ${file}`, `←`, '←']
                     );
                 }
             }
@@ -64,7 +64,7 @@ async function registerEvents(client, dir) {
                 } catch(err) {
                     console.log(err);
                     eventStatus.push(
-                        [`- ${file}`, `←`, `←`]
+                        [`ERR: ${file}`, `←`, `←`]
                     );
                 }
             }

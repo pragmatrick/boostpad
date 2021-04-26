@@ -35,9 +35,9 @@ module.exports = {
                     permissionOverwrites: [
                         {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]}
                     ]
-                }).then(channel => {
+                }).then(async (channel) => {
                 await newMember.setChannel(channel);
-            }).catch(err => {
+            }).catch(async (err) => {
                 console.log(err);
                 await newMember.kick();
             });        
