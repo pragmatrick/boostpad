@@ -36,10 +36,10 @@ module.exports = {
                         {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]}
                     ]
                 }).then(channel => {
-                newMember.setChannel(channel);
+                await newMember.setChannel(channel);
             }).catch(err => {
                 console.log(err);
-                newMember.kick();
+                await newMember.kick();
             });        
             // Sending infinite chamber use to log
             const channelID = (newMember.member.hasPermission("ADMINISTRATOR"))
