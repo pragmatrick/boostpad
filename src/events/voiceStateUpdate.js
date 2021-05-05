@@ -31,7 +31,7 @@ module.exports = {
             const nickname = newMember.member.nickname;
             const name = nickname.split(/ +/)[0];
             joinedChannel.clone({
-                    name: "Have you met "+name+"?", //client.config.create_channels.vc.name
+                    name: client.config.create_channels.vc.name, //"Have you met "+name+"?"
                     permissionOverwrites: [
                         {id: newMember.member.id, allow: ["MANAGE_CHANNELS"]}
                     ]
