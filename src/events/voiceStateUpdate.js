@@ -42,10 +42,15 @@ module.exports = {
                 await newMember.kick();
             });        
             // Sending infinite chamber use to log
-            const channelID = (newMember.member.hasPermission("ADMINISTRATOR"))
-                                    ? client.config.channels.admin_usage 
-                                    : client.config.channels.bot_usage;
-            const message = `🗣 | ${newMember.member} used the infinite chamber (${moment().format("ddd D MMM YYYY k:mm")}).`
+            let channelID, member;
+            if (newMember.member.hasPermission("ADMINISTRATOR")) {
+                channelID = client.config.channels.bot_usage;
+                member = newMember.member.nickname;
+            } else {
+                channelID = client.config.channels.admin_usage;
+                member = newMember.member;
+            }
+            const message = `🗣 | ${member} used the infinite chamber (${moment().format("ddd D MMM YYYY k:mm")}).`
             newMember.guild.channels.cache.get(channelID).send(message);
         }
 
