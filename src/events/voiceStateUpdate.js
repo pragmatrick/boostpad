@@ -44,10 +44,10 @@ module.exports = {
             // Sending infinite chamber use to log
             let channelID, member;
             if (newMember.member.hasPermission("ADMINISTRATOR")) {
-                channelID = client.config.channels.bot_usage;
+                channelID = client.config.channels.admin_usage;
                 member = newMember.member.nickname;
             } else {
-                channelID = client.config.channels.admin_usage;
+                channelID = client.config.channels.bot_usage;
                 member = newMember.member;
             }
             const message = `🗣 | ${member} used the infinite chamber (${moment().format("ddd D MMM YYYY k:mm")}).`
