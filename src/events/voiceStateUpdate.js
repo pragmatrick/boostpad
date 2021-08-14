@@ -28,8 +28,6 @@ module.exports = {
         // Join to create VC
         if (newMember.channelID === client.config.create_channels.vc.id) {
             const joinedChannel = newMember.channel;
-            const nickname = newMember.member.nickname;
-            const name = nickname.split(/ +/)[0];
             joinedChannel.clone({
                     name: client.config.create_channels.vc.name, //"Have you met "+name+"?"
                     permissionOverwrites: [
